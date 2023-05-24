@@ -1,41 +1,91 @@
-*{
-    font-family: Arial, Helvetica, sans-serif
-}
-.navbar {
-  background-color: black;
-  height: 100px; 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
-  color: white;
-}
+  *{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-.navbar img {
-  height: 40px; 
-  margin-right: 10px; 
-}
 
-.navbar .slogan {
-  font-size: 20px; 
-}
+/* navbar */
 
-.navbar ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-}
+  .navbar {
+    background-color: black;
+    height: 100px; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    color: white;
+  }
 
-.navbar ul li {
-  margin-left: 10px; 
-}
+  .navbar img {
+    height: 40px; 
+    margin-right: 10px; 
+  }
 
-.navbar ul li a {
-  padding-right: 30px;
-  color: white;
-  text-decoration: none;
-}
-span{
-    font-weight: bold;
-}
+  .navbar .slogan {
+    font-size: 20px; 
+  }
+
+  .navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+
+  .navbar ul li {
+    margin-left: 10px; 
+  }
+
+  .navbar ul li a {
+    padding-right: 30px;
+    color: white;
+    text-decoration: none;
+    font-size: 13pt;
+  }
+  span{
+      font-weight: bold;
+  }
+
+  /* grid home */
+
+  .grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  grid-template-rows: 1fr 1fr;
+  padding-top: 30px;
+  /* gap: 10px;  */
+  height: 700px;
+  width: 1100px;
+  margin: auto;
+  }
+
+  .grid-item {
+    background-color: rgba(0, 0, 0, .8);
+  padding: 20px;
+  font-size: 18px;
+  }
+  .wrapper{
+    width: 100%;
+    background-image: url('https://c4.wallpaperflare.com/wallpaper/402/45/106/war-and-army-airsoft-wallpaper-preview.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 100px;
+    color: white;
+
+    }
+
+  .wrapper .grid-container .grid-item .content{
+    padding-top: 40px;
+  }
+  .wrapper .grid-container .grid-item span{
+    font-size: 16pt;
+  }
+
+  .section{
+    background-color: rgb(49, 49, 49);
+    height: 400px;
+  }
+

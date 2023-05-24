@@ -4,51 +4,13 @@
     <link href="{{ url('/css/app.css') }}" rel="stylesheet">
 
   <style>
-    *{
+    /* *{
       font-family: Arial, Helvetica, sans-serif;
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-    }
-    .navbar {
-      background-color: black;
-      height: 100px; 
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
-      color: white;
-    }
+    } */
 
-    .navbar img {
-      height: 40px; 
-      margin-right: 10px; 
-    }
-
-    .navbar .slogan {
-      font-size: 20px; 
-    }
-
-    .navbar ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-    }
-
-    .navbar ul li {
-      margin-left: 10px; 
-    }
-
-    .navbar ul li a {
-      padding-right: 30px;
-      color: white;
-      text-decoration: none;
-      font-size: 13pt;
-    }
-    span{
-        font-weight: bold;
-    }
   </style>
 </head>
 <body>
