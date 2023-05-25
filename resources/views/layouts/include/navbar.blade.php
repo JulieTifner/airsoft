@@ -24,7 +24,11 @@
       <li><a href="#">Events</a></li>
       <li><a href="#">Über uns</a></li>
       <li><a href="#">Kontakt</a></li>
-      <li><a href="#">Groups list</a></li>
+      @if(auth()->check())
+        @if(auth()->user()->role==1)
+      <li><a href="{{ route('userlist') }}">Benutzer</a></li>
+        @endif
+      @endif
       <li><a href="#">FAQ</a></li>
               <!-- Authentication Links -->
               @guest

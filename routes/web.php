@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
+});
+
+//admin
+Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function() {
+    Route::get('/users', [App\Http\Controllers\UserController::class,'index'])->name('userlist');
+
 });
 
 Auth::routes();
