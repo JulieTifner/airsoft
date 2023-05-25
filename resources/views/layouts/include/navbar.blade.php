@@ -25,7 +25,7 @@
       <li><a href="#">Über uns</a></li>
       <li><a href="#">Kontakt</a></li>
       @if(auth()->check())
-        @if(auth()->user()->role==1)
+        @if(auth()->user()->role_id==2)
       <li><a href="{{ route('userlist') }}">Benutzer</a></li>
         @endif
       @endif
