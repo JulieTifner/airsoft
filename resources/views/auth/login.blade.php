@@ -1,7 +1,7 @@
 <style>
       *{
     font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
+    margin:5 0;
     padding: 0;
     box-sizing: border-box;
   }

@@ -12,11 +12,7 @@
         <th scope="col">Name</th>
         <th scope="col">Mail</th>
         <th scope="col">Rolle</th>
-        @if(auth()->check())
-            @if(auth()->user()->role_id==1)
-                <th scope="col">Aktion</th>
-            @endif
-        @endif
+        <th scope="col">Aktion</th>
       </tr>
     </thead>
     <tbody>
@@ -26,14 +22,11 @@
         <td>{{ $user->name }}</td>
         <td>{{ $user->email }}</td>
         <td>{{ $user->role->name }}</td>
-        @if(auth()->check())
-            @if(auth()->user()->role_id==1)
-                <td>
-                    <button type="button" class="btn btn-primary">Edit</button>
-                    <button type="button" class="btn btn-danger">Delete</button>
-                </td>
-            @endif
-        @endif
+        <td>
+            <button type="button" class="btn btn-primary">Edit</button>
+            <button type="button" class="btn btn-danger">Delete</button>
+
+        </td>
       </tr>
     @endforeach
 

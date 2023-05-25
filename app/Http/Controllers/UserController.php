@@ -21,4 +21,17 @@ class UserController extends Controller
 
         ]);
     }
+
+
+    public function edit(){
+
+        $users = User::all();
+        $roles = Role::all();
+
+        return view('admin.edit-user')->with([
+            'users' => $users,
+            'roles' => $roles,
+
+        ]);
+    }
 }
