@@ -3,17 +3,60 @@
 <head>
     <link href="{{ url('/css/app.css') }}" rel="stylesheet">
     
-
   <style>
-    *{
-      font-family: Arial, Helvetica, sans-serif;
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        * {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #f2f2f2;
+        }
 
-  </style>
+        .navbar img {
+            height: 30px;
+            width: auto;
+        }
+
+        .slogan {
+            margin-left: 10px;
+        }
+
+        ul {
+            display: flex;
+            list-style: none;
+        }
+
+        li {
+            margin-left: 10px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #333;
+        }
+
+        /* Media queries */
+        @media screen and (min-width: 768px) {
+            .navbar img {
+                height: 40px;
+            }
+
+            .slogan {
+                font-size: 1.2rem;
+            }
+
+            li {
+                margin-left: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
   <nav class="navbar">
@@ -22,7 +65,7 @@
       <span class="slogan">CIVILIAN ARMED FORCES</span>
     </div>
     <ul>
-      <li><a class="nav-link" href="{{ route('home') }}">Home</a></li>
+      <li><a class="nav-link" href="{{ route('home') }}" style="color: rgb(235, 235, 2);">Home</a></li>
       <li><a class="nav-link" href="#">Events</a></li>
       <li><a class="nav-link" href="#">Über uns</a></li>
       <li><a class="nav-link" href="#">Kontakt</a></li>

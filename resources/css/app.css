@@ -24,7 +24,7 @@
   }
 
   .navbar .slogan {
-    font-size: 20px; 
+    font-size: 25pt; 
   }
 
   .navbar ul {
@@ -42,7 +42,9 @@
     padding-right: 30px;
     color: white;
     text-decoration: none;
-    font-size: 13pt;
+    font-size: 17pt;
+    font-weight: bold;
+
   }
   span{
       font-weight: bold;
@@ -54,28 +56,31 @@
   .wrapper {
     display: flex;
     align-items: center;
-    background-color: rgb(32, 32, 32);
+    /* background-color: rgb(32, 32, 32); */
+    background-image: url('https://images.hdqwalls.com/wallpapers/call-of-duty-mobile-4k-game-2019-3a.jpg');
     padding: 0 100px 0 100px;
+    height: 1200px;
   }
 
   .box {
     flex: 1;
     padding: 10px;
     width: 100px;
-    background-color: rgb(32, 32, 32);
     margin: 50px;
-    text-align: center;
+    text-align: left;
   }
 
 .box h1{
   color: white;
   font-weight: bold;
+  font-size: 50pt;
   padding-bottom: 20px;
 }
 
 .box p{
-  color: rgb(141, 141, 141);
-  font-weight: bold;
+  color: rgb(255, 255, 255);
+  font-size: 20pt;
+
 }
 
   @media (max-width: 768px) {
