@@ -66,7 +66,7 @@
     </div>
     <ul>
       <li><a class="nav-link" href="{{ route('home') }}" style="color: rgb(235, 235, 2);">Home</a></li>
-      <li><a class="nav-link" href="#">Events</a></li>
+      <li><a class="nav-link" href="{{ route('events') }}">Events</a></li>
       <li><a class="nav-link" href="#">Über uns</a></li>
       <li><a class="nav-link" href="#">Kontakt</a></li>
       @if(auth()->check())

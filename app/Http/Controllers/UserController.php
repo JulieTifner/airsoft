@@ -46,7 +46,7 @@ class UserController extends Controller
         $user->role_id = $validatedData['role'];
         $user->save();
 
-        return redirect()->back()->with('success', 'Rolle erfolgreich aktualisiert.');
+        return redirect()->route('userlist')->with('success', 'Rolle erfolgreich aktualisiert.');
     }
 
 }

@@ -3,11 +3,7 @@
 @section('content')
 
 <div class="container d-flex flex-column maximus" style="min-height: calc(100vh - 374px);">
-  @if (session('success'))
-  <div class="alert alert-success">
-      {{ session('success') }}
-  </div>
-@endif
+
     <h1>Benutzer Übersicht</h1>
 
 <table class="table">

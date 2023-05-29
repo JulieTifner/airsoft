@@ -6,6 +6,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Location;
+
 use DB;
 
 
@@ -30,6 +32,7 @@ class UserSeeder extends Seeder
                 'birthday' => now(),
                 'email' => 'user@user.ch',
                 'password' => '12345678',
+                'location_id' => Location::inRandomOrder()->first()->id,
                 'role_id' => '3',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -43,6 +46,7 @@ class UserSeeder extends Seeder
                 'birthday' => now(),
                 'email' => 'intern@intern.ch',
                 'password' => '12345678',
+                'location_id' => Location::inRandomOrder()->first()->id,
                 'role_id' => '2',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -56,6 +60,7 @@ class UserSeeder extends Seeder
                 'birthday' => now(),
                 'email' => 'admin@admin.ch',
                 'password' => '12345678',
+                'location_id' => Location::inRandomOrder()->first()->id,
                 'role_id' => '1',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -76,6 +81,7 @@ class UserSeeder extends Seeder
                 'birthday' => now(),
                 'email' => $faker->unique()->safeEmail,
                 'password' => bcrypt('password'),
+                'location_id' => Location::inRandomOrder()->first()->id,
                 'role_id' => $faker->randomElement($roles),
                 'created_at' => now(),
                 'updated_at' => now(),
