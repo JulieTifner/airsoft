@@ -19,7 +19,6 @@
   </div>
 
 <script>
-  console.log('huisbd');
   // Hintergrundbilder für die Diashow
   var backgroundImages = [
     'https://images.hdqwalls.com/wallpapers/call-of-duty-mobile-4k-game-2019-3a.jpg',
