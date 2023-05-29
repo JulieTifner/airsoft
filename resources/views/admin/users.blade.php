@@ -29,7 +29,9 @@
         @if(auth()->check())
             @if(auth()->user()->role_id==1)
                 <td>
-                    <button type="button" class="btn btn-primary">Edit</button>
+                    <button type="button" class="btn btn-primary">
+                      <a href="{{route('users.edit',$user->id)}}" style="color:white;">Edit</a>
+                    </button>
                     <button type="button" class="btn btn-danger">Delete</button>
                 </td>
             @endif

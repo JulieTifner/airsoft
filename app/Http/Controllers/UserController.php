@@ -23,10 +23,11 @@ class UserController extends Controller
     }
 
 
-    public function edit(){
-
+    public function edit(User $user)
+    {
         $users = User::all();
         $roles = Role::all();
+        $user = User::find($user);
 
         return view('admin.edit-user')->with([
             'users' => $users,
@@ -34,4 +35,18 @@ class UserController extends Controller
 
         ]);
     }
+    
+
+    public function update(Request $request, User $user)
+    {
+        $validatedData = $request->validate([
+            'role' => 'required|exists:roles,id',
+        ]);
+
+        $user->role_id = $validatedData['role'];
+        $user->save();
+
+        return redirect()->back()->with('success', 'Rolle erfolgreich aktualisiert.');
+    }
+
 }

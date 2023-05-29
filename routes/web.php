@@ -19,8 +19,8 @@ Route::get('/', function () {
 //admin
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function() {
     Route::get('/users', [App\Http\Controllers\UserController::class,'index'])->name('userlist');
-    Route::get('/edit/', [App\Http\Controllers\UserController::class,'update'])->name('edit');
-
+    Route::get('/users/{user}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{user}', [App\Http\Controllers\UserController::class, 'update'])->name('users.update');    
 
 });
 
