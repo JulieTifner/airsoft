@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Location;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -67,6 +68,11 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $location = Location::firstOrCreate([
+            'city' => $data['city'],
+            'zip' => $data['zip']
+        ]);
+
         return User::create([
             'lastname' => $data['lastname'],
             'firstname' => $data['firstname'],
@@ -76,6 +82,7 @@ class RegisterController extends Controller
             'birthday' => $data['birthday'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'location_id' => $location->id,
         ]);
     }
 }
