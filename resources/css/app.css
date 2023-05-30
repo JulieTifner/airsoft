@@ -119,3 +119,19 @@
 
 /* calendar */
 
+.calendar-wrapper .container #calendar{
+  margin: 50px;
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+} 
+
+.calendar-wrapper .container{
+  padding: 10px;
+}
+
+.calendar-wrapper{
+  background-size: cover; 
+  background-image: url('https://media.istockphoto.com/id/928856142/photo/military-uniform-pattern-with-blur-effect.jpg?s=612x612&w=0&k=20&c=f21cdH1l_QVfVW8u6bpjnkWzl2SHxFUsLGIRsQ4Zqic=');
+  background-repeat: no-repeat;
+  width: 100%;
+}
