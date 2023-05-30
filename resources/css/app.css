@@ -1,41 +1,121 @@
-*{
-    font-family: Arial, Helvetica, sans-serif
-}
-.navbar {
-  background-color: black;
-  height: 100px; 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
+  *{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+
+/* navbar */
+
+  .navbar {
+    background-color: black;
+    height: 100px; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    color: white;
+  }
+
+  .navbar img {
+    height: 40px; 
+    margin-right: 10px; 
+  }
+
+  .navbar .slogan {
+    font-size: 25pt; 
+  }
+
+  .navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+
+  .navbar ul li {
+    margin-left: 10px; 
+  }
+
+  .navbar ul li a {
+    padding-right: 30px;
+    color: white;
+    text-decoration: none;
+    font-size: 16pt;
+    /* font-weight: bold; */
+
+  }
+  span{
+      font-weight: bold;
+  }
+
+  /* home */
+
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-image: url('https://images.hdqwalls.com/wallpapers/call-of-duty-mobile-4k-game-2019-3a.jpg');
+    padding: 0 100px 0 100px;
+    height: 800px;
+  }
+
+  .box {
+    flex: 1;
+    padding: 10px;
+    width: 100px;
+    margin: 0px 50px 200px 50px;
+    text-align: left;
+  }
+
+.box h1{
   color: white;
+  font-weight: bold;
+  font-size: 50pt;
+  padding-bottom: 20px;
 }
 
-.navbar img {
-  height: 40px; 
-  margin-right: 10px; 
+.box p{
+  color: rgb(255, 255, 255);
+  font-size: 20pt;
+
 }
 
-.navbar .slogan {
-  font-size: 20px; 
+.section{
+ 
+  position: absolute;
+  bottom: 0; 
+  left: 0; 
+  width: 90%;
+  height: 300px;
 }
 
-.navbar ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
+.box .btn-group a{
+  background-color: rgb(235, 235, 2); 
+  color: black; 
+  padding: 15px 25px 15px 25px;
+  font-size: 15pt;
+  font-weight: bold;
+  margin: 20px 0px 0px 0px;
 }
 
-.navbar ul li {
-  margin-left: 10px; 
-}
-
-.navbar ul li a {
-  padding-right: 30px;
-  color: white;
+.box .btn-group a:hover{
   text-decoration: none;
+  
 }
-span{
-    font-weight: bold;
-}
+
+
+
+  @media (max-width: 768px) {
+    .wrapper {
+      flex-direction: column;
+    }
+  }
+
+
+
+/* calendar */
+

@@ -1,99 +1,43 @@
-@include('navbar')
+@extends('layouts.app')
 
-
-<!DOCTYPE html>
-<html>
-<head>
-  <style>
-    *{
-        color: white;
-    }
-    .grid-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr; 
-      grid-template-rows: 1fr 1fr;
-      padding-top: 0px;
-      /* gap: 10px;  */
-      height: 700px;
-      width: 1100px;
-      margin: auto;
-    }
-
-    .grid-item {
-        background-color: rgba(0, 0, 0, .8);
-      padding: 20px;
-      font-size: 18px;
-    }
-    .wrapper {
-    width: 100%;
-    height: 1000px;
-    background-image: linear-gradient(to bottom, transparent, black), url('https://cdn.wallpapersafari.com/61/5/URZrel.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding: 100px;
-    color: white;
-  }
-
-
-    .wrapper .grid-container .grid-item .content{
-        padding-top: 40px;
-    }
-    .wrapper .grid-container .grid-item span{
-        font-size: 16pt;
-    }
-
-    .section{
-        background-color: black;
-        height: 600px;
-        padding-top: 100px;
-    }
-
-    .section .content {
-    margin: auto;
-    background-color: rgb(49, 49, 49);
-    width: 1100px;
-    height: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding-top: 10px;
-  }
-
-  .section .content h1 {
-    margin: 0;
-  }
-</style>
-
-</head>
-<body>
-    <div class="wrapper">
-        <div class="grid-container">
-            <div class="grid-item"><h1>Titel h1</h1>
-                <div class="content">
-                    <h2>Titel h2</h2>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
-                    ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
-                    dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-                </div>
-            </div>
-            <div class="grid-item">Image</div>
-            <div class="grid-item">Image</div>
-            <div class="grid-item"><h1>Titel h1</h1>
-                <div class="content">
-                    <h2>Titel h2</h2>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
-                    ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
-                    dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-                </div>
-            </div>
+@section('content')
+<div class="wrapper">
+    <div class="box">
+        <h1>Lorem ipsum <br>dolor sit amet, consetetur</h1>
+       <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+        sed diam nonumy eirmod tempor invidunt ut labore et dolore
+        magna aliquy</p> 
+    
+        <div class="btn-group">
+          <a href="#">Gallerie</a>
         </div>
     </div>
+ 
     <div class="section">
-        <div class="content">
-            <h1>Über uns</h1>
-        </div>
+      
     </div>
+  </div>
 
-</body>
-</html>
+<script>
+  // Hintergrundbilder für die Diashow
+  var backgroundImages = [
+    'https://images.hdqwalls.com/wallpapers/call-of-duty-mobile-4k-game-2019-3a.jpg',
+    'https://c4.wallpaperflare.com/wallpaper/962/231/806/airsoft-wallpaper-preview.jpg',
+    'https://img.freepik.com/premium-photo/portrait-airsoft-player-professional-equipment-with-machine-gun-abandoned-ruined-building-soldier-with-weapons-war-smoke-fog_154092-2407.jpg'
+  ];
+  
+  // Index des aktuellen Hintergrundbilds
+  var currentIndex = 0;
+  
+  // Funktion zum Ändern des Hintergrundbilds
+  function changeBackgroundImage() {
+    var section = document.querySelector('.wrapper');
+    section.style.backgroundImage = 'url(' + backgroundImages[currentIndex] + ')';
+    currentIndex = (currentIndex + 1) % backgroundImages.length;
+  }
+  
+  // Initialisierung der Diashow
+  changeBackgroundImage();
+  setInterval(changeBackgroundImage, 5000); // Hintergrundbild alle 5 Sekunden ändern
+</script>
+@endsection

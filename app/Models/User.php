@@ -18,9 +18,16 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'firstname',
+        'lastname',
+        'street',
+        'nr',
+        'phone',
+        'birthday',
         'email',
         'password',
+        'role_id',
+        'location_id',
     ];
 
     /**
@@ -42,4 +49,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public static function boot(){
+
+        parent::boot();
+
+        static::creating(function ($user) {
+            if(!$user->role_id){
+                $user->role_id = 3;
+            }
+        });
+    }
+
+    public function role(){
+
+        return $this->belongsTo(Role::class, 'role_id');
+    }
+
 }
