@@ -12,7 +12,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr; 
       grid-template-rows: 1fr 1fr;
-      padding-top: 30px;
+      padding-top: 0px;
       /* gap: 10px;  */
       height: 700px;
       width: 1100px;
@@ -24,15 +24,16 @@
       padding: 20px;
       font-size: 18px;
     }
-    .wrapper{
-        width: 100%;
-        background-image: url('https://c4.wallpaperflare.com/wallpaper/402/45/106/war-and-army-airsoft-wallpaper-preview.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-        padding: 100px;
-        color: white;
+    .wrapper {
+    width: 100%;
+    height: 1000px;
+    background-image: linear-gradient(to bottom, transparent, black), url('https://cdn.wallpapersafari.com/61/5/URZrel.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 100px;
+    color: white;
+  }
 
-        }
 
     .wrapper .grid-container .grid-item .content{
         padding-top: 40px;
@@ -42,11 +43,28 @@
     }
 
     .section{
-        background-color: rgb(49, 49, 49);
-        height: 400px;
+        background-color: black;
+        height: 600px;
+        padding-top: 100px;
     }
 
-  </style>
+    .section .content {
+    margin: auto;
+    background-color: rgb(49, 49, 49);
+    width: 1100px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 10px;
+  }
+
+  .section .content h1 {
+    margin: 0;
+  }
+</style>
+
 </head>
 <body>
     <div class="wrapper">
@@ -72,7 +90,9 @@
         </div>
     </div>
     <div class="section">
-        
+        <div class="content">
+            <h1>Über uns</h1>
+        </div>
     </div>
 
 </body>
