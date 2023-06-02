@@ -44,7 +44,7 @@ $(document).ready(function () {
 
     var calendar = $('#calendar').fullCalendar({
         editable: true,
-        events: SITEURL + "/fullcalender",
+        events: SITEURL + "/events",
         displayEventTime: false,
         editable: true,
         selectable: true,
