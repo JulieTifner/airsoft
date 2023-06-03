@@ -99,10 +99,16 @@
                 </form>
             </div>
             <div class="modal-footer">
-                {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
-                <button type="button" class="btn btn-primary" id="saveEvent">Bearbeiten</button>
-                <button type="button" class="btn btn-danger" id="saveEvent">Löschen</button>
+                @if(auth()->check())
+                    @if(auth()->user()->role_id==1)
+                        {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
+                        <button type="button" class="btn btn-primary" id="saveEvent">Bearbeiten</button>
+                        <button type="button" class="btn btn-danger" id="saveEvent">Löschen</button>
+                    @else
+                        <button type="button" class="btn btn-primary" id="saveEvent">Anmelden</button>
 
+                    @endif
+                @endif
             </div>
         </div>
     </div>
