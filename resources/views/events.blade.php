@@ -22,14 +22,42 @@
                         <input type="text" class="form-control" id="eventTitle" name="title">
                     </div>
                     <div class="form-group">
-                        <label for="eventTitle">Beschreibung</label>
+                        <label for="eventDescription">Beschreibung</label>
                         <input type="text" class="form-control" id="eventDescription" name="description">
                     </div>
-                    <div class="form-group">
-                        <label for="eventTitle">Preis</label>
-                        <input type="text" class="form-control" id="eventCost" name="cost">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="eventCost">Preis</label>
+                                <input type="text" class="form-control" id="eventCost" name="cost">
+                            </div>
+                            <div class="form-group">
+                                <label for="eventDeadline">Ort</label>
+                                <input type="text" class="form-control" id="eventDeadline" name="deadline">
+                            </div>
+                            <div class="form-group">
+                                <label for="eventFrom">Von</label>
+                                <input type="text" class="form-control" id="eventFrom" name="from">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="eventMeeting">Anz. Plätze</label>
+                                <input type="text" class="form-control" id="eventMeeting" name="meeting">
+                            </div>
+                           
+                            <div class="form-group">
+                                <label for="eventType">Art</label>
+                                <input type="dropdown" class="form-control" id="eventType" name="type">
+                            </div>
+                            <div class="form-group">
+                                <label for="eventTo">Bis</label>
+                                <input type="text" class="form-control" id="eventTo" name="to">
+                            </div>
+                        </div>
                     </div>
                 </form>
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -53,22 +81,24 @@
             <div class="modal-body">
                 <form id="eventForm">
                     <div class="form-group">
-                        <label for="eventTitle">Titel</label>
-                        <input type="text" class="form-control" id="eventTitle" name="title">
+                        <label for="eventTitle"><strong>Titel</strong></label>
+                        <p class="" id="eventTitle" name="title"></p>
                     </div>
                     <div class="form-group">
-                        <label for="eventTitle">Beschreibung</label>
-                        <input type="text" class="form-control" id="eventDescription" name="description">
+                        <label for="eventTitle"><strong>Beschreibung</strong></label>
+                        <p class="" id="eventDescription" name="description"></p>
                     </div>
                     <div class="form-group">
-                        <label for="eventTitle">Preis</label>
-                        <input type="text" class="form-control" id="eventCost" name="cost">
+                        <label for="eventTitle"><strong>Preis</strong></label>
+                        <p class="" id="eventCost" name="cost"></p>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveEvent">Save</button>
+                {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
+                <button type="button" class="btn btn-primary" id="saveEvent">Bearbeiten</button>
+                <button type="button" class="btn btn-danger" id="saveEvent">Löschen</button>
+
             </div>
         </div>
     </div>
@@ -141,9 +171,9 @@ $(document).ready(function () {
             },
             type: 'GET',
             success: function (response) {
-                $('#showEventModal').find('#eventTitle').val(response.title);
-                $('#showEventModal').find('#eventDescription').val(response.description);
-                $('#showEventModal').find('#eventCost').val(response.cost);
+                $('#showEventModal').find('#eventTitle').text(response.title);
+                $('#showEventModal').find('#eventDescription').text(response.description);
+                $('#showEventModal').find('#eventCost').text(response.cost);
 
                 $('#showEventModal').modal('show');
             },
