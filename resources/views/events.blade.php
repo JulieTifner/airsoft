@@ -10,17 +10,24 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="eventModalLabel">Event Title</h5>
+                <h5 class="modal-title" id="eventModalLabel">Event Erfassen</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <!-- Form to add event details -->
                 <form id="eventForm">
                     <div class="form-group">
-                        <label for="eventTitle">Event Title</label>
+                        <label for="eventTitle">Titel</label>
                         <input type="text" class="form-control" id="eventTitle" name="title">
+                    </div>
+                    <div class="form-group">
+                        <label for="eventTitle">Beschreibung</label>
+                        <input type="text" class="form-control" id="eventDescription" name="description">
+                    </div>
+                    <div class="form-group">
+                        <label for="eventTitle">Preis</label>
+                        <input type="text" class="form-control" id="eventCost" name="cost">
                     </div>
                 </form>
             </div>
@@ -60,6 +67,14 @@ $(document).ready(function () {
             // Open the Bootstrap Modal when a date is selected
             $('#eventModal').modal('show');
             $('#eventModal').data('eventStart', start); // Speichere den Startzeitpunkt im Modal
+
+            $('#eventModal').find('.close').click(function() {
+                $('#eventModal').modal('hide');
+                
+            });
+            $('#eventModal').find('.modal-footer .btn-secondary').click(function() {
+                $('#eventModal').modal('hide');
+            });
         },
         eventDrop: function (event, delta) {
             var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD");
@@ -69,6 +84,7 @@ $(document).ready(function () {
                 url: SITEURL + '/fullcalenderAjax',
                 data: {
                     title: event.title,
+                    description: event.description,
                     start: start,
                     end: end,
                     id: event.id,
@@ -102,6 +118,8 @@ $(document).ready(function () {
     // Handle the click event of the Save button inside the modal
     $('#saveEvent').click(function () {
         var title = $('#eventModal').find('#eventTitle').val();
+        var description = $('#eventModal').find('#eventDescription').val();
+        var cost = $('#eventModal').find('#eventCost').val();
         var start = $('#eventModal').data('eventStart'); // Lade den Startzeitpunkt aus dem Modal
         var end = moment(start).endOf('day'); // Setze das Enddatum auf das Ende des Tages
 
@@ -109,6 +127,8 @@ $(document).ready(function () {
             url: SITEURL + "/fullcalenderAjax",
             data: {
                 title: title,
+                description: description,
+                cost: cost,
                 start: start.format('YYYY-MM-DD'),
                 end: end.format('YYYY-MM-DD'),
                 type: 'add'
@@ -120,6 +140,8 @@ $(document).ready(function () {
                 calendar.fullCalendar('renderEvent', {
                     id: data.id,
                     title: title,
+                    description: description,
+                    cost: cost,
                     start: start,
                     end: end,
                     allDay: true

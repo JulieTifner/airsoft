@@ -34,6 +34,8 @@ class EventController extends Controller
            case 'add':
               $event = Event::create([
                   'title' => $request->title,
+                  'description' => $request->description,
+                  'cost' => $request->cost,
                   'start' => $request->start,
                   'end' => $request->end,
               ]);
@@ -44,6 +46,8 @@ class EventController extends Controller
            case 'update':
               $event = Event::find($request->id)->update([
                   'title' => $request->title,
+                  'description' => $request->description,
+                  'cost' => $request->cost,
                   'start' => $request->start,
                   'end' => $request->end,
               ]);
