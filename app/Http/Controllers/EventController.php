@@ -36,6 +36,33 @@ class EventController extends Controller
     }
 
 
+
+public function update(Request $request)
+    {
+        $eventId = $request->input('eventId');
+
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'cost' => 'required|numeric',
+        ]);
+
+        $event = Event::find($eventId);
+
+        if (!$event) {
+            return response()->json(['error' => 'Event not found'], 404);
+        }
+
+        $event->title = $validatedData['title'];
+        $event->description = $validatedData['description'];
+        $event->cost = $validatedData['cost'];
+    
+        $event->save();
+
+        return response()->json($event);
+    }
+
+
     /**
      * Write code on Method
      *

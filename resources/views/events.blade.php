@@ -6,66 +6,70 @@
 </div>
 
 <!-- New event Modal -->
-<div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="eventModalLabel">Event Erfassen</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="eventForm">
-                    <div class="form-group">
-                        <label for="eventTitle">Titel</label>
-                        <input type="text" class="form-control" id="eventTitle" name="title">
+@if(auth()->check())
+    @if(auth()->user()->role_id==1)
+        <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="eventModalLabel">Event Erfassen</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    <div class="form-group">
-                        <label for="eventDescription">Beschreibung</label>
-                        <input type="text" class="form-control" id="eventDescription" name="description">
+                    <div class="modal-body">
+                        <form id="eventForm">
+                            <div class="form-group">
+                                <label for="eventTitle">Titel</label>
+                                <input type="text" class="form-control" id="eventTitle" name="title">
+                            </div>
+                            <div class="form-group">
+                                <label for="eventDescription">Beschreibung</label>
+                                <input type="text" class="form-control" id="eventDescription" name="description">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="eventCost">Preis</label>
+                                        <input type="text" class="form-control" id="eventCost" name="cost">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="eventDeadline">Ort</label>
+                                        <input type="text" class="form-control" id="eventDeadline" name="deadline">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="eventFrom">Von</label>
+                                        <input type="text" class="form-control" id="eventFrom" name="from">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="eventMeeting">Anz. Plätze</label>
+                                        <input type="text" class="form-control" id="eventMeeting" name="meeting">
+                                    </div>
+                                
+                                    <div class="form-group">
+                                        <label for="eventType">Art</label>
+                                        <input type="dropdown" class="form-control" id="eventType" name="type">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="eventTo">Bis</label>
+                                        <input type="text" class="form-control" id="eventTo" name="to">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="eventCost">Preis</label>
-                                <input type="text" class="form-control" id="eventCost" name="cost">
-                            </div>
-                            <div class="form-group">
-                                <label for="eventDeadline">Ort</label>
-                                <input type="text" class="form-control" id="eventDeadline" name="deadline">
-                            </div>
-                            <div class="form-group">
-                                <label for="eventFrom">Von</label>
-                                <input type="text" class="form-control" id="eventFrom" name="from">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="eventMeeting">Anz. Plätze</label>
-                                <input type="text" class="form-control" id="eventMeeting" name="meeting">
-                            </div>
-                           
-                            <div class="form-group">
-                                <label for="eventType">Art</label>
-                                <input type="dropdown" class="form-control" id="eventType" name="type">
-                            </div>
-                            <div class="form-group">
-                                <label for="eventTo">Bis</label>
-                                <input type="text" class="form-control" id="eventTo" name="to">
-                            </div>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="saveEvent">Save</button>
                     </div>
-                </form>
-                
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveEvent">Save</button>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    @endif
+@endif
 
 
 <!-- Show event Modal -->
@@ -103,6 +107,8 @@
         </div>
     </div>
 </div>
+
+
 
 
 <script>
@@ -190,6 +196,7 @@ $(document).ready(function () {
                     $('#showEventModal').modal('hide');
                 });
             },
+          
         //     var deleteMsg = confirm("Do you really want to delete?");
         //     if (deleteMsg) {
         //         $.ajax({
