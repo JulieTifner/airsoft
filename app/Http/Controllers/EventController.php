@@ -17,11 +17,25 @@ class EventController extends Controller
             ->whereDate('end', '<=', $request->end)
             ->get(['id', 'title', 'start', 'end']);
         
-             return response()->json($data);
+            return response()->json($data);
         }
         return view('events');
     }
  
+
+    public function show(Request $request)
+    {
+        $id = $request->input('eventId');
+        $event = Event::find($id);
+        
+        if (!$event) {
+            return response()->json(['error' => 'Event not found'], 404);
+        }
+        
+        return response()->json($event);
+    }
+
+
     /**
      * Write code on Method
      *

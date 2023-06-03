@@ -5,7 +5,7 @@
     <div id='calendar'></div>
 </div>
 
-<!-- Bootstrap Modal -->
+<!-- New event Modal -->
 <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -38,6 +38,42 @@
         </div>
     </div>
 </div>
+
+
+<!-- Show event Modal -->
+<div class="modal fade" id="showEventModal" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eventModalLabel">Event</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="eventForm">
+                    <div class="form-group">
+                        <label for="eventTitle">Titel</label>
+                        <input type="text" class="form-control" id="eventTitle" name="title">
+                    </div>
+                    <div class="form-group">
+                        <label for="eventTitle">Beschreibung</label>
+                        <input type="text" class="form-control" id="eventDescription" name="description">
+                    </div>
+                    <div class="form-group">
+                        <label for="eventTitle">Preis</label>
+                        <input type="text" class="form-control" id="eventCost" name="cost">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveEvent">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script>
 $(document).ready(function () {
@@ -84,7 +120,7 @@ $(document).ready(function () {
                 url: SITEURL + '/fullcalenderAjax',
                 data: {
                     title: event.title,
-                    description: event.description,
+                    description: event.description,       
                     start: start,
                     end: end,
                     id: event.id,
@@ -97,22 +133,49 @@ $(document).ready(function () {
             });
         },
         eventClick: function (event) {
-            var deleteMsg = confirm("Do you really want to delete?");
-            if (deleteMsg) {
-                $.ajax({
-                    type: "POST",
-                    url: SITEURL + '/fullcalenderAjax',
-                    data: {
-                        id: event.id,
-                        type: 'delete'
-                    },
-                    success: function (response) {
-                        calendar.fullCalendar('removeEvents', event.id);
-                        displayMessage("Event Deleted Successfully");
-                    }
-                });
+            
+            $.ajax({
+            url: SITEURL + '/event',
+            data: {
+                eventId: event.id
+            },
+            type: 'GET',
+            success: function (response) {
+                $('#showEventModal').find('#eventTitle').val(response.title);
+                $('#showEventModal').find('#eventDescription').val(response.description);
+                $('#showEventModal').find('#eventCost').val(response.cost);
+
+                $('#showEventModal').modal('show');
+            },
+            error: function (xhr, status, error) {
+                console.log(error);
             }
-        }
+        });
+
+            $('#showEventModal').find('.close').click(function() {
+                    $('#showEventModal').modal('hide');
+                    
+                });
+                $('#showEventModal').find('.modal-footer .btn-secondary').click(function() {
+                    $('#showEventModal').modal('hide');
+                });
+            },
+        //     var deleteMsg = confirm("Do you really want to delete?");
+        //     if (deleteMsg) {
+        //         $.ajax({
+        //             type: "POST",
+        //             url: SITEURL + '/fullcalenderAjax',
+        //             data: {
+        //                 id: event.id,
+        //                 type: 'delete'
+        //             },
+        //             success: function (response) {
+        //                 calendar.fullCalendar('removeEvents', event.id);
+        //                 displayMessage("Event Deleted Successfully");
+        //             }
+        //         });
+        //     }
+        // }
     });
 
     // Handle the click event of the Save button inside the modal
