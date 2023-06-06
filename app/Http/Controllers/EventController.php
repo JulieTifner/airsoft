@@ -63,13 +63,15 @@ public function update(Request $request)
     }
 
 
-    public function enroll($eventId){
-
+    public function enroll($eventId)
+    {
         $event = Event::find($eventId);
-
-        return view('enroll')->with([
-            'event' => $event,
-        ]);
+    
+        if (!$event) {
+            return abort(404);
+        }
+    
+        return view('enroll', compact('event'));
     }
 
     /**

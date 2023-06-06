@@ -106,18 +106,18 @@
                         <button type="button" class="btn btn-danger" id="saveEvent">Löschen</button>
                     @elseif(auth()->user()->role_id==2 || auth()->user()->role_id==3)
                         @if(auth()->user()->verified == true)
-                            <button type="button" class="btn btn-primary" id="saveEvent" onclick="redirectToEnroll(eventId)">
-                                Anmelden
-                            </button>
+                        <button type="button" class="btn btn-primary enroll-button" id="enroll">
+                            Anmelden
+                        </button>
                         @else
-                        <p>Du bist nicht verifiziert</p>
+                            <p>Du bist nicht verifiziert</p>
                         @endif
                   @endif
                   @else
                   <p>Erstelle ein Konto</p>          
-                    <button type="button" class="btn btn-primary" id="saveEvent" disabled>
-                        Anmelden
-                    </button>          
+                  <button type="button" class="btn btn-primary" id="enroll" disabled>
+                    Anmelden
+                </button>         
                 @endif
             </div>
         </div>
@@ -128,6 +128,7 @@
 
 <script>
 $(document).ready(function () {
+ 
     var SITEURL = "{{ url('/') }}";
 
     $.ajaxSetup({
@@ -195,13 +196,21 @@ $(document).ready(function () {
                 $('#showEventModal').find('#eventTitle').text(response.title);
                 $('#showEventModal').find('#eventDescription').text(response.description);
                 $('#showEventModal').find('#eventCost').text(response.cost);
-
+                $('#showEventModal').find('#enroll').click(function () {
+                    var eventId = event.id;
+                    var eventUrl = '{{ route("enroll", ":eventId") }}';
+                    eventUrl = eventUrl.replace(':eventId', eventId);
+                    window.location.href = eventUrl;
+                });
                 $('#showEventModal').modal('show');
+                    // redirectToEnroll(event.id);
+                console.log(eventId)
             },
             error: function (xhr, status, error) {
                 console.log(error);
             }
         });
+        
 
             $('#showEventModal').find('.close').click(function() {
                     $('#showEventModal').modal('hide');
@@ -215,13 +224,7 @@ $(document).ready(function () {
             
             
         });
-        function redirectToEnroll(eventId) {
-            console.log(eventId);
-            var eventUrl = '{{ route("enroll", ":eventId") }}';
-            eventUrl = eventUrl.replace(':eventId', eventId);
-            window.location.href = eventUrl;
-        }
-
+ 
 
     // Handle the click event of the Save button inside the modal
     $('#saveEvent').click(function () {
