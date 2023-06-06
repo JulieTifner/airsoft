@@ -105,9 +105,13 @@
                         <button type="button" class="btn btn-primary" id="saveEvent">Bearbeiten</button>
                         <button type="button" class="btn btn-danger" id="saveEvent">Löschen</button>
                     @elseif(auth()->user()->role_id==2 || auth()->user()->role_id==3)
-                    <button type="button" class="btn btn-primary" id="saveEvent" onclick="redirectToEnroll(eventId)">
-                        Anmelden
-                    </button>
+                        @if(auth()->user()->verified == true)
+                            <button type="button" class="btn btn-primary" id="saveEvent" onclick="redirectToEnroll(eventId)">
+                                Anmelden
+                            </button>
+                        @else
+                        <p>Du bist nicht verifiziert</p>
+                        @endif
                   @endif
                   @else
                   <p>Erstelle ein Konto</p>          
