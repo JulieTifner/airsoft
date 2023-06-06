@@ -123,8 +123,16 @@
     }
   }
 
+  /* Userlist */
+
+.verified{
+  color: green;
+}
 
 
+.not-verified{
+  color: red;
+}
 /* calendar */
 
 .calendar-wrapper .container #calendar{

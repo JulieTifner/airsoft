@@ -19,10 +19,10 @@ return new class extends Migration
             $table->date('start');
             $table->date('end');
 
-            $table->unsignedBigInteger('type_id');
+            // $table->unsignedBigInteger('type_id');
 
-            $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
-            
+            // $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

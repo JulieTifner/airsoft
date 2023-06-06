@@ -20,8 +20,8 @@ Route::get('/', function () {
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function() {
     Route::get('/users', [App\Http\Controllers\UserController::class,'index'])->name('userlist');
     Route::get('/users/{user}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('users.edit');
-    Route::put('/users/{user}', [App\Http\Controllers\UserController::class, 'update'])->name('users.update');    
-
+    Route::put('/users/{user}/approve', [App\Http\Controllers\UserController::class, 'approve'])->name('users.approve');    
+    Route::put('/users/{user}', [App\Http\Controllers\UserController::class, 'update'])->name('users.update'); 
 });
 
 Auth::routes();
