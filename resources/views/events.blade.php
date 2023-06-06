@@ -104,16 +104,21 @@
                         {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
                         <button type="button" class="btn btn-primary" id="saveEvent">Bearbeiten</button>
                         <button type="button" class="btn btn-danger" id="saveEvent">Löschen</button>
-                    @else
-                        <button type="button" class="btn btn-primary" id="saveEvent">Anmelden</button>
-
-                    @endif
+                    @elseif(auth()->user()->role_id==2 || auth()->user()->role_id==3)
+                    <button type="button" class="btn btn-primary" id="saveEvent" onclick="redirectToEnroll(eventId)">
+                        Anmelden
+                    </button>
+                  @endif
+                  @else
+                  <p>Erstelle ein Konto</p>          
+                    <button type="button" class="btn btn-primary" id="saveEvent" disabled>
+                        Anmelden
+                    </button>          
                 @endif
             </div>
         </div>
     </div>
 </div>
-
 
 
 
@@ -203,31 +208,24 @@ $(document).ready(function () {
                 });
             },
           
-        //     var deleteMsg = confirm("Do you really want to delete?");
-        //     if (deleteMsg) {
-        //         $.ajax({
-        //             type: "POST",
-        //             url: SITEURL + '/fullcalenderAjax',
-        //             data: {
-        //                 id: event.id,
-        //                 type: 'delete'
-        //             },
-        //             success: function (response) {
-        //                 calendar.fullCalendar('removeEvents', event.id);
-        //                 displayMessage("Event Deleted Successfully");
-        //             }
-        //         });
-        //     }
-        // }
-    });
+            
+            
+        });
+        function redirectToEnroll(eventId) {
+            console.log(eventId);
+            var eventUrl = '{{ route("enroll", ":eventId") }}';
+            eventUrl = eventUrl.replace(':eventId', eventId);
+            window.location.href = eventUrl;
+        }
+
 
     // Handle the click event of the Save button inside the modal
     $('#saveEvent').click(function () {
         var title = $('#eventModal').find('#eventTitle').val();
         var description = $('#eventModal').find('#eventDescription').val();
         var cost = $('#eventModal').find('#eventCost').val();
-        var start = $('#eventModal').data('eventStart'); // Lade den Startzeitpunkt aus dem Modal
-        var end = moment(start).endOf('day'); // Setze das Enddatum auf das Ende des Tages
+        var start = $('#eventModal').data('eventStart'); 
+        var end = moment(start).endOf('day'); 
 
         $.ajax({
             url: SITEURL + "/fullcalenderAjax",

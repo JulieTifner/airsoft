@@ -10,18 +10,18 @@ class EventController extends Controller
 {
     public function index(Request $request)
     {
-  
         if($request->ajax()) {
-       
+            
             $data = Event::whereDate('start', '>=', $request->start)
             ->whereDate('end', '<=', $request->end)
             ->get(['id', 'title', 'start', 'end']);
-        
+            
             return response()->json($data);
         }
         return view('events');
-    }
+        }
  
+
 
     public function show(Request $request)
     {
@@ -62,6 +62,15 @@ public function update(Request $request)
         return response()->json($event);
     }
 
+
+    public function enroll($eventId){
+
+        $event = Event::find($eventId);
+
+        return view('enroll')->with([
+            'event' => $event,
+        ]);
+    }
 
     /**
      * Write code on Method
