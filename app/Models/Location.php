@@ -14,4 +14,10 @@ class Location extends Model
         'zip',
         
     ];
+
+
+    public function map()
+    {
+        return $this->hasMany(Map::class);
+    }
 }
