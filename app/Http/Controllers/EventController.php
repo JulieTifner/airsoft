@@ -72,12 +72,16 @@ public function update(Request $request)
     public function enroll($eventId)
     {
         $event = Event::find($eventId);
+        $maps = Map::all();
     
         if (!$event) {
             return abort(404);
         }
     
-        return view('enroll', compact('event'));
+        return view('enroll')->with([
+            'event' => $event,
+            'maps' => $maps,
+        ]);
     }
 
     /**

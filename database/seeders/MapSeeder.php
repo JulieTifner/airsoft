@@ -18,7 +18,7 @@ class MapSeeder extends Seeder
         $maps = [
             [
                 'name' => 'Shoothouse',
-                'description' => 'Eine Wundervolle map im freien bei der wir uns super abschiessen können',
+                'description' => 'Eine Wundervolle map im freien bei der wir uns super abschiessen können Grosse Map mit viel Versteckmöglichkeit Grosse Map mit viel Versteckmöglichkeit',
                 'type' => 1,
                 'street' => 'Hintergumselstrasse',
                 'nr' => '34',
@@ -27,7 +27,7 @@ class MapSeeder extends Seeder
             ],
             [
                 'name' => 'Rust',
-                'description' => 'Grosse Map mit viel Versteckmöglichkeit',
+                'description' => 'Grosse Map mit viel Versteckmöglichkeit Grosse Map mit viel Versteckmöglichkeit Grosse Map mit viel Versteckmöglichkeit',
                 'type' => 0,
                 'street' => 'Anderhanselstrasse',
                 'nr' => '47',
