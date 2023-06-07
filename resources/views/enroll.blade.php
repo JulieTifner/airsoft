@@ -21,7 +21,7 @@
                         </div>
                         <div class="form-group">
                             <label for="eventDeadline"><strong>Ort</strong></label>
-                            <p class="" id="eventDeadline" name="deadline"></p>
+                            <p class="" id="eventDeadline" name="deadline">Test</p>
                         </div>
                         <div class="form-group">
                             <label for="eventFrom"><strong>Von</strong></label>
@@ -35,7 +35,11 @@
                         </div>
                         <div class="form-group">
                             <label for="eventType"><strong>Art</strong></label>
-                            <p class="" id="eventType" name="type"></p>
+                            @if($event->type == 1)
+                                <p class="" id="eventType" name="type">Spiel</p>
+                            @else
+                                <p class="" id="eventType" name="type">Training</p>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label for="eventTo"><strong>Bis</strong></label>

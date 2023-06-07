@@ -21,6 +21,9 @@ return new class extends Migration
             $table->time('from');
             $table->time('to');
             $table->integer('max_player');
+            $table->boolean('type');
+
+            
             // $table->unsignedBigInteger('map_id');
 
             // $table->foreign('map_id')->references('id')->on('maps');

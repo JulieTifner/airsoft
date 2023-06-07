@@ -10,6 +10,7 @@ class EventController extends Controller
 {
     public function index(Request $request)
     {
+        
         if($request->ajax()) {
             
             $data = Event::whereDate('start', '>=', $request->start)
@@ -83,6 +84,7 @@ public function update(Request $request)
     {
         switch ($request->type) {
             case 'add':
+                $gameType = ($request->gameType == 1) ? true : false;
                 $event = Event::create([
                   'title' => $request->title,
                   'description' => $request->description,
@@ -92,6 +94,8 @@ public function update(Request $request)
                   'from' => $request->from,
                   'to' => $request->to,
                   'max_player' => $request->max_player,
+                  'type' => $gameType,
+
                 ]);
                 
                 
@@ -108,6 +112,8 @@ public function update(Request $request)
                 'from' => $request->from,
                 'to' => $request->to,
                 'max_player' => $request->max_player,
+                'type' => $request->type,
+
               ]);
  
               return response()->json($event);

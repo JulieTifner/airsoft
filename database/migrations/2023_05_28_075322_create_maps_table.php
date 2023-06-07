@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->boolean('type');
-            $table->boolean('environment');
             $table->string('street');
             $table->string('nr');
             $table->timestamps();

@@ -11,7 +11,7 @@ class Map extends Model
 
 
     protected $fillable = [
-        'name', 'description', 'type', 'environment', 'street', 'nr', 'location_id'
+        'name', 'description', 'type', 'street', 'nr', 'location_id'
     ];
 
 

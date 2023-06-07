@@ -28,12 +28,12 @@
                                 <label for="eventDescription">Beschreibung</label>
                                 <textarea name="description" id="eventDescription" cols="30" rows="4" class="form-control"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="eventDeadline">Map</label>
-                                <input type="text" class="form-control" id="eventDeadline" name="deadline">
-                            </div>
                             <div class="row">
                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="eventDeadline">Map</label>
+                                        <input type="text" class="form-control" id="eventDeadline" name="deadline">
+                                    </div>
                                     <div class="form-group">
                                         <label for="eventCost">Preis (CHF)</label>
                                         <input type="text" class="form-control" id="eventCost" name="cost">
@@ -44,6 +44,13 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="eventDeadline">Art</label>
+                                        <select class="form-control" id="eventType" name="type">
+                                            <option value="spiel">Spiel</option>
+                                            <option value="training">Training</option>
+                                        </select>
+                                    </div>
                                     <div class="form-group">
                                         <label for="eventMeeting">Anz. Plätze</label>
                                         <input type="number" class="form-control" id="eventMaxPlayer" name="max_player">
@@ -240,9 +247,15 @@ $(document).ready(function () {
         var from = $('#eventModal').find('#eventFrom').val();
         var to = $('#eventModal').find('#eventTo').val();
         var max_player = $('#eventModal').find('#eventMaxPlayer').val();
+        var gameType = $('#eventModal').find('#eventType').val(); 
         var start = $('#eventModal').data('eventStart'); 
         var end = moment(start).endOf('day'); 
 
+        if (gameType  === 'spiel') {
+            gameType  = 1;
+        } else if (gameType === 'training') {
+            gameType = 0;
+        }
         $.ajax({
             url: SITEURL + "/fullcalenderAjax",
             data: {
@@ -252,6 +265,7 @@ $(document).ready(function () {
                 from: from,
                 to: to,
                 max_player: max_player,
+                gameType: gameType,
                 start: start.format('YYYY-MM-DD'),
                 end: end.format('YYYY-MM-DD'),
                 type: 'add'
@@ -268,6 +282,7 @@ $(document).ready(function () {
                     from: from,
                     to: to,
                     max_player: max_player,
+                    gameType: gameType,
                     start: start,
                     end: end,
                     allDay: true
@@ -276,7 +291,6 @@ $(document).ready(function () {
                 calendar.fullCalendar('unselect');
             }
         });
-        console.log(title + " " + description + " " + cost + " " +  from + " " +  to + " " + max_player); 
 
         // Hide the modal after saving
         $('#eventModal').modal('hide');
