@@ -5,7 +5,7 @@
 <div class="container mt-5" style=" width: 1000px;">
     <div class="card w-75">
         <div class="card-body">
-            <h3 class="card-title">{{ $event->title }}</h3>
+            <h3 class="card-title pb-2">{{ $event->title }}</h3>
             <form id="eventForm">
                 <div class="form-group">
                     <label for="eventDescription"><strong>Beschreibung</strong></label>
@@ -18,8 +18,12 @@
                             <p class="card-text" id="eventCost" name="cost">{{ $event->cost }}</p>
                         </div>
                         <div class="form-group">
-                            <label for="eventDeadline"><strong>Ort</strong></label>
-                            <p class="card-text" id="eventDeadline" name="deadline">Test</p>
+                            <label for="eventFrom"><strong>Typ</strong></label>
+                            @if($event->map->typ == 1)
+                                <p class="card-text" id="eventFrom" name="from">Outdoor</p>
+                            @else
+                                <p class="card-text" id="eventFrom" name="from">Indoor</p>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label for="eventFrom"><strong>Von</strong></label>
@@ -46,51 +50,37 @@
                     </div>
                 </div>
             </form>
-            <a href="#" class="btn btn-primary">Anmelden</a>
         </div>
     </div>
     <div class="card w-75">
         <div class="card-body">
-          <h5 class="card-title">Map</h5>
-          <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="eventCost"><strong>Name</strong></label>
-                    <p class="card-text" id="eventCost" name="cost">{{ $event->map->name }}</p>
+          <h5 class="card-title pb-3">Map</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="eventCost"><strong>Name</strong></label>
+                        <p class="card-text" id="eventCost" name="cost">{{ $event->map->name }}</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventCost"><strong>Beschreibung</strong></label>
+                        <p class="card-text" id="eventCost" name="cost">{{ $event->map->description }}</p>
+                    </div>
+            
                 </div>
-                <div class="form-group">
-                    <label for="eventCost"><strong>Beschreibung</strong></label>
-                    <p class="card-text" id="eventCost" name="cost">{{ $event->map->description }}</p>
-                </div>
-                <div class="form-group">
-                    <label for="eventFrom"><strong>Typ</strong></label>
-                    @if($event->map->typ == 1)
-                        <p class="card-text" id="eventFrom" name="from">Outdoor</p>
-                    @else
-                        <p class="card-text" id="eventFrom" name="from">Indoor</p>
-                    @endif
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="eventMeeting"><strong>Adresse</strong></label>
-                    <p class="card-text" id="eventMeeting" name="meeting">{{ $event->map->street . " " . $event->map->nr}}</p>
-                    <p class="card-text" id="eventMeeting" name="meeting">{{ $event->map->location->zip . ", " . $event->map->location->city}}</p>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="eventMeeting"><strong>Adresse</strong></label>
+                        <p class="card-text" id="eventMeeting" name="meeting">{{ $event->map->street . " " . $event->map->nr}}</p>
+                        <p class="card-text" id="eventMeeting" name="meeting">{{ $event->map->location->zip . ", " . $event->map->location->city}}</p>
 
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="eventType"><strong>Art</strong></label>
-                    @if($event->type == 1)
-                        <p class="card-text" id="eventType" name="type">Spiel</p>
-                    @else
-                        <p class="card-text" id="eventType" name="type">Training</p>
-                    @endif
-                </div>
-             
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary">Anmelden</a>
             </div>
         </div>
-        </div>
-      </div>
+    </div>
     
 </div>
 @endsection
