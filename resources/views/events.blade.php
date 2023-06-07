@@ -31,8 +31,14 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="eventDeadline">Map</label>
-                                        <input type="text" class="form-control" id="eventDeadline" name="deadline">
+                                        <div class="form-group">
+                                            <label for="eventDeadline">Map</label>
+                                            <select class="form-control" id="eventMap" name="map_id">
+                                                @foreach($maps as $map)
+                                                    <option value="{{ $map->id }}">{{ $map->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="eventCost">Preis (CHF)</label>
@@ -248,8 +254,11 @@ $(document).ready(function () {
         var to = $('#eventModal').find('#eventTo').val();
         var max_player = $('#eventModal').find('#eventMaxPlayer').val();
         var gameType = $('#eventModal').find('#eventType').val(); 
+        var map_id= $('#eventModal').find('#eventMap').val();
         var start = $('#eventModal').data('eventStart'); 
         var end = moment(start).endOf('day'); 
+
+        console.log(map_id);
 
         if (gameType  === 'spiel') {
             gameType  = 1;
@@ -266,6 +275,7 @@ $(document).ready(function () {
                 to: to,
                 max_player: max_player,
                 gameType: gameType,
+                map_id: map_id,
                 start: start.format('YYYY-MM-DD'),
                 end: end.format('YYYY-MM-DD'),
                 type: 'add'

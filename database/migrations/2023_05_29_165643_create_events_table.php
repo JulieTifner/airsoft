@@ -24,9 +24,9 @@ return new class extends Migration
             $table->boolean('type');
 
             
-            // $table->unsignedBigInteger('map_id');
+            $table->unsignedBigInteger('map_id');
 
-            // $table->foreign('map_id')->references('id')->on('maps');
+            $table->foreign('map_id')->references('id')->on('maps');
 
             $table->timestamps();
         });

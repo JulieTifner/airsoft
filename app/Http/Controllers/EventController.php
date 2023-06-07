@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Models\Map;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
     public function index(Request $request)
     {
-        
+        $maps = Map::all();
+
         if($request->ajax()) {
             
             $data = Event::whereDate('start', '>=', $request->start)
@@ -19,8 +21,11 @@ class EventController extends Controller
             
             return response()->json($data);
         }
-        return view('events');
-        }
+        return view('events')->with([
+            'maps' => $maps, 
+        ]);
+        
+    }
  
 
 
@@ -95,6 +100,7 @@ public function update(Request $request)
                   'to' => $request->to,
                   'max_player' => $request->max_player,
                   'type' => $gameType,
+                  'map_id' => $request->map_id
 
                 ]);
                 
