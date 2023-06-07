@@ -26,36 +26,32 @@
                             </div>
                             <div class="form-group">
                                 <label for="eventDescription">Beschreibung</label>
-                                <input type="text" class="form-control" id="eventDescription" name="description">
+                                <textarea name="description" id="eventDescription" cols="30" rows="4" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventDeadline">Map</label>
+                                <input type="text" class="form-control" id="eventDeadline" name="deadline">
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="eventCost">Preis</label>
+                                        <label for="eventCost">Preis (CHF)</label>
                                         <input type="text" class="form-control" id="eventCost" name="cost">
                                     </div>
                                     <div class="form-group">
-                                        <label for="eventDeadline">Ort</label>
-                                        <input type="text" class="form-control" id="eventDeadline" name="deadline">
-                                    </div>
-                                    <div class="form-group">
                                         <label for="eventFrom">Von</label>
-                                        <input type="text" class="form-control" id="eventFrom" name="from">
+                                        <input type="time" class="form-control" id="eventFrom" name="from">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="eventMeeting">Anz. Plätze</label>
-                                        <input type="text" class="form-control" id="eventMeeting" name="meeting">
+                                        <input type="number" class="form-control" id="eventMaxPlayer" name="max_player">
                                     </div>
                                 
                                     <div class="form-group">
-                                        <label for="eventType">Art</label>
-                                        <input type="dropdown" class="form-control" id="eventType" name="type">
-                                    </div>
-                                    <div class="form-group">
                                         <label for="eventTo">Bis</label>
-                                        <input type="text" class="form-control" id="eventTo" name="to">
+                                        <input type="time" class="form-control" id="eventTo" name="to">
                                     </div>
                                 </div>
                             </div>
@@ -93,10 +89,7 @@
                         <label for="eventTitle"><strong>Beschreibung</strong></label>
                         <p class="" id="eventDescription" name="description"></p>
                     </div>
-                    <div class="form-group">
-                        <label for="eventTitle"><strong>Preis</strong></label>
-                        <p class="" id="eventCost" name="cost"></p>
-                    </div>
+                  
                 </form>
             </div>
             <div class="modal-footer">
@@ -176,7 +169,11 @@ $(document).ready(function () {
                 url: SITEURL + '/fullcalenderAjax',
                 data: {
                     title: event.title,
-                    description: event.description,       
+                    description: event.description,
+                    cost: cost,
+                    from: from,
+                    to: to,
+                    max_player: max_player,  
                     start: start,
                     end: end,
                     id: event.id,
@@ -200,6 +197,12 @@ $(document).ready(function () {
                 $('#showEventModal').find('#eventTitle').text(response.title);
                 $('#showEventModal').find('#eventDescription').text(response.description);
                 $('#showEventModal').find('#eventCost').text(response.cost);
+                $('#showEventModal').find('#eventFrom').text(response.from);
+                $('#showEventModal').find('#eventTo').text(response.to);
+                $('#showEventModal').find('#eventMaxPlayer').text(response.max_player);
+
+
+
                 $('#showEventModal').find('#enroll').click(function () {
                     var eventId = event.id;
                     var eventUrl = '{{ route("enroll", ":eventId") }}';
@@ -207,8 +210,7 @@ $(document).ready(function () {
                     window.location.href = eventUrl;
                 });
                 $('#showEventModal').modal('show');
-                    // redirectToEnroll(event.id);
-                console.log(eventId)
+
             },
             error: function (xhr, status, error) {
                 console.log(error);
@@ -235,6 +237,9 @@ $(document).ready(function () {
         var title = $('#eventModal').find('#eventTitle').val();
         var description = $('#eventModal').find('#eventDescription').val();
         var cost = $('#eventModal').find('#eventCost').val();
+        var from = $('#eventModal').find('#eventFrom').val();
+        var to = $('#eventModal').find('#eventTo').val();
+        var max_player = $('#eventModal').find('#eventMaxPlayer').val();
         var start = $('#eventModal').data('eventStart'); 
         var end = moment(start).endOf('day'); 
 
@@ -244,6 +249,9 @@ $(document).ready(function () {
                 title: title,
                 description: description,
                 cost: cost,
+                from: from,
+                to: to,
+                max_player: max_player,
                 start: start.format('YYYY-MM-DD'),
                 end: end.format('YYYY-MM-DD'),
                 type: 'add'
@@ -251,20 +259,24 @@ $(document).ready(function () {
             type: "POST",
             success: function (data) {
                 displayMessage("Event Created Successfully");
-
+                
                 calendar.fullCalendar('renderEvent', {
                     id: data.id,
                     title: title,
                     description: description,
                     cost: cost,
+                    from: from,
+                    to: to,
+                    max_player: max_player,
                     start: start,
                     end: end,
                     allDay: true
                 }, true);
-
+                
                 calendar.fullCalendar('unselect');
             }
         });
+        console.log(title + " " + description + " " + cost + " " +  from + " " +  to + " " + max_player); 
 
         // Hide the modal after saving
         $('#eventModal').modal('hide');

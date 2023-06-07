@@ -81,27 +81,33 @@ public function update(Request $request)
      */
     public function ajax(Request $request)
     {
- 
         switch ($request->type) {
-           case 'add':
-              $event = Event::create([
+            case 'add':
+                $event = Event::create([
                   'title' => $request->title,
                   'description' => $request->description,
                   'cost' => $request->cost,
                   'start' => $request->start,
                   'end' => $request->end,
-              ]);
- 
-              return response()->json($event);
+                  'from' => $request->from,
+                  'to' => $request->to,
+                  'max_player' => $request->max_player,
+                ]);
+                
+                
+                return response()->json($event);
              break;
   
            case 'update':
               $event = Event::find($request->id)->update([
-                  'title' => $request->title,
-                  'description' => $request->description,
-                  'cost' => $request->cost,
-                  'start' => $request->start,
-                  'end' => $request->end,
+                'title' => $request->title,
+                'description' => $request->description,
+                'cost' => $request->cost,
+                'start' => $request->start,
+                'end' => $request->end,
+                'from' => $request->from,
+                'to' => $request->to,
+                'max_player' => $request->max_player,
               ]);
  
               return response()->json($event);
