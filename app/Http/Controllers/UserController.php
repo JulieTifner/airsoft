@@ -49,4 +49,11 @@ class UserController extends Controller
         return redirect()->route('userlist')->with('success', 'Rolle erfolgreich aktualisiert.');
     }
 
+    public function approve(Request $request, User $user)
+    {
+        $user->verified = true;
+        $user->save();
+        return back();
+    }
+    
 }

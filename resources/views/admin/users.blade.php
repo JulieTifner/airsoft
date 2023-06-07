@@ -17,6 +17,7 @@
         <th scope="col">Nachname</th>
         <th scope="col">Mail</th>
         <th scope="col">Rolle</th>
+        <th scope="col">Status</th>
         @if(auth()->check())
             @if(auth()->user()->role_id==1)
                 <th scope="col">Aktion</th>
@@ -32,13 +33,23 @@
         <td>{{ $user->lastname }}</td>
         <td>{{ $user->email }}</td>
         <td>{{ $user->role->name }}</td>
-        @if(auth()->check())
+        <td class="{{ $user->verified ? 'verified' : 'not-verified' }}">
+          {{ $user->verified ? 'verifiziert' : 'nicht verifizert'  }}
+        </td>
+          @if(auth()->check())
             @if(auth()->user()->role_id==1)
-                <td style="width: 200px;">
+                <td style="width: 250px;">
                     <button type="button" class="btn btn-primary">
                       <a href="{{route('users.edit',$user->id)}}" style="color:white;">Edit</a>
                     </button>
                     <button type="button" class="btn btn-danger">Delete</button>
+                    @if($user->verified == 0)
+                      <form action="{{ route('users.approve',$user->id) }}" method="POST" style="display: inline;">
+                        @method('PUT')
+                        @csrf
+                        <button type="submit" class="btn btn-success" style="color:white;">Verify</button>
+                      </form>
+                    @endif
                 </td>
             @endif
         @endif

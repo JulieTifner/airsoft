@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('phone');
             $table->date('birthday');
             $table->string('email')->unique();
+            $table->boolean('verified')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
 

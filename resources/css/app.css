@@ -53,7 +53,7 @@
   }
   
   .navbar ul li a {
-    font-size: 18pt;
+    font-size: 17pt;
   }
 }
 
@@ -123,8 +123,16 @@
     }
   }
 
+  /* Userlist */
+
+.verified{
+  color: green;
+}
 
 
+.not-verified{
+  color: red;
+}
 /* calendar */
 
 .calendar-wrapper .container #calendar{
