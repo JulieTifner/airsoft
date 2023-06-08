@@ -24,8 +24,8 @@
   // Hintergrundbilder für die Diashow
   var backgroundImages = [
     'https://images.hdqwalls.com/wallpapers/call-of-duty-mobile-4k-game-2019-3a.jpg',
-    'https://c4.wallpaperflare.com/wallpaper/962/231/806/airsoft-wallpaper-preview.jpg',
-    'https://img.freepik.com/premium-photo/portrait-airsoft-player-professional-equipment-with-machine-gun-abandoned-ruined-building-soldier-with-weapons-war-smoke-fog_154092-2407.jpg'
+    'https://images.pexels.com/photos/3706636/pexels-photo-3706636.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    'https://media.istockphoto.com/id/523381809/photo/two-soldiers-in-action.jpg?b=1&s=612x612&w=0&k=20&c=LJ8ENC4STKVGg43SYv962KU3yVOpv9-G7Zg7rV3igJw='
   ];
   
   // Index des aktuellen Hintergrundbilds
