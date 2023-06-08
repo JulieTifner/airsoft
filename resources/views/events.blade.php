@@ -136,7 +136,9 @@
 
 
 
+<script src='fullcalendar/lang-all.js'></script>
 <script>
+
 $(document).ready(function () {
  
     var SITEURL = "{{ url('/') }}";
@@ -161,17 +163,16 @@ $(document).ready(function () {
             } else {
                 event.allDay = false;
             }
-            element.css('background-color', '#000000'); 
+            element.css('background-color', '#8ab586'); 
 
-            element.css('border', '1px solid #000000'); 
+            element.css('border', '1px solid #8ab586'); 
 
-            element.css('color', '#ffffff'); 
+            element.css('color', '#000000'); 
 
         },
         select: function (start, end, allDay) {
-            // Open the Bootstrap Modal when a date is selected
             $('#eventModal').modal('show');
-            $('#eventModal').data('eventStart', start); // Speichere den Startzeitpunkt im Modal
+            $('#eventModal').data('eventStart', start); 
 
             $('#eventModal').find('.close').click(function() {
                 $('#eventModal').modal('hide');
@@ -244,12 +245,10 @@ $(document).ready(function () {
                 });
             },
           
-     
+            firstDay: 1,
             
         });
  
-
-    // Handle the click event of the Save button inside the modal
     $('#saveEvent').click(function () {
         var title = $('#eventModal').find('#eventTitle').val();
         var description = $('#eventModal').find('#eventDescription').val();
@@ -307,7 +306,6 @@ $(document).ready(function () {
             }
         });
 
-        // Hide the modal after saving
         $('#eventModal').modal('hide');
     });
 
