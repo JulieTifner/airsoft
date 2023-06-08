@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container mt-5" style=" width: 1000px;">
+<div class="container" style=" width: 1000px;">
     <div class="card w-75">
         <div class="card-body">
             <h3 class="card-title pb-2">{{ $event->title }}</h3>

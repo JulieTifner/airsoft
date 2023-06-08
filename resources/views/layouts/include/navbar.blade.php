@@ -5,7 +5,9 @@
     
 </head>
 <style>
-    
+    #logout-form{
+      color:red;
+    }
 </style>
 <body>
   <nav class="navbar">
@@ -15,7 +17,7 @@
     </div>
        
     <ul>
-      <li><a class="nav-link" href="{{ route('home') }}" style="color: rgb(235, 235, 2);">Home</a></li>
+      <li><a class="nav-link" href="{{ route('home') }}" style="color: rgb(255, 255, 2);">Home</a></li>
       <li><a class="nav-link" href="{{ route('events') }}">Events</a></li>
       <li><a class="nav-link" href="#">Über uns</a></li>
       <li><a class="nav-link" href="#">Kontakt</a></li>
@@ -46,7 +48,7 @@
               </a>
   
               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style="color:black; width: 20px;">
-                  <a class="dropdown-item" style="color:black;" href="{{ route('logout') }}"
+                  <a class="dropdown-item" style="color:black; width: 30px;" href="{{ route('logout') }}"
                      onclick="event.preventDefault();
                                    document.getElementById('logout-form').submit();">
                       {{ __('Logout') }}

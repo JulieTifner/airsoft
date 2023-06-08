@@ -9,7 +9,7 @@
   @endif
     <h1>Benutzer Übersicht</h1>
 
-<table class="table">
+  <table class="table">
     <thead class="thead-dark">
       <tr>
         <th scope="col">#</th>
@@ -26,36 +26,39 @@
       </tr>
     </thead>
     <tbody>
-    @foreach($users as $user)
-      <tr>
-        <th scope="row">{{ $loop->iteration }}</th>
-        <td>{{ $user->firstname }}</td>
-        <td>{{ $user->lastname }}</td>
-        <td>{{ $user->email }}</td>
-        <td>{{ $user->role->name }}</td>
-        <td class="{{ $user->verified ? 'verified' : 'not-verified' }}">
-          {{ $user->verified ? 'verifiziert' : 'nicht verifizert'  }}
-        </td>
-          @if(auth()->check())
-            @if(auth()->user()->role_id==1)
-                <td style="width: 250px;">
-                    <button type="button" class="btn btn-primary">
-                      <a href="{{route('users.edit',$user->id)}}" style="color:white;">Edit</a>
-                    </button>
-                    <button type="button" class="btn btn-danger">Delete</button>
-                    @if($user->verified == 0)
-                      <form action="{{ route('users.approve',$user->id) }}" method="POST" style="display: inline;">
-                        @method('PUT')
-                        @csrf
-                        <button type="submit" class="btn btn-success" style="color:white;">Verify</button>
-                      </form>
-                    @endif
-                </td>
+      @foreach($users as $user)
+            @if(auth()->check() && auth()->user()->role_id==1 && auth()->user()->id !== $user->id)
+              <tr>
+                <th scope="row">{{ $loop->iteration }}</th>
+                <td>{{ $user->firstname }}</td>
+                <td>{{ $user->lastname }}</td>
+                <td>{{ $user->email }}</td>
+                <td>{{ $user->role->name }}</td>
+                  @if($user->role_id==1)
+                    <td>-</td>
+                  @else
+                    <td class="{{ $user->verified ? 'verified' : 'not-verified' }}">
+                      {{ $user->verified ? 'verifiziert' : 'nicht verifizert'  }}
+                    </td>
+                  @endif
+                  <td style="width: 250px;">
+                      <button type="button" class="btn btn-primary">
+                        <a href="{{ route('users.edit',$user->id) }}" style="color:white;">Edit</a>
+                      </button>
+                      <button type="button" class="btn btn-danger">Delete</button>
+                      @if($user->verified == 0)
+                        @if($user->role_id == 2 || $user->role_id ==3)
+                            <form action="{{ route('users.approve',$user->id) }}" method="POST" style="display: inline;">
+                                @method('PUT')
+                                @csrf
+                                <button type="submit" class="btn btn-success" style="color:white;">Verify</button>
+                            </form>
+                          @endif
+                      @endif
+                  </td>
+              </tr>
             @endif
-        @endif
-      </tr>
-    @endforeach
-
+        @endforeach
     </tbody>
   </table>
 <div>

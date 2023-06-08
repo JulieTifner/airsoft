@@ -94,10 +94,10 @@
             </div>
             <div class="modal-body">
                 <form id="eventForm">
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="eventTitle"><strong>Titel</strong></label>
                         <p class="" id="eventTitle" name="title"></p>
-                    </div>
+                    </div> --}}
                     <div class="form-group">
                         <label for="eventTitle"><strong>Beschreibung</strong></label>
                         <p class="" id="eventDescription" name="description"></p>
@@ -155,11 +155,18 @@ $(document).ready(function () {
         selectable: true,
         selectHelper: true,
         eventRender: function (event, element, view) {
+            
             if (event.allDay === 'true') {
                 event.allDay = true;
             } else {
                 event.allDay = false;
             }
+            element.css('background-color', '#000000'); 
+
+            element.css('border', '1px solid #000000'); 
+
+            element.css('color', '#ffffff'); 
+
         },
         select: function (start, end, allDay) {
             // Open the Bootstrap Modal when a date is selected
@@ -207,15 +214,12 @@ $(document).ready(function () {
             },
             type: 'GET',
             success: function (response) {
-                $('#showEventModal').find('#eventTitle').text(response.title);
+                $('#showEventModal').find('#eventModalLabel').text(response.title);
                 $('#showEventModal').find('#eventDescription').text(response.description);
                 $('#showEventModal').find('#eventCost').text(response.cost);
                 $('#showEventModal').find('#eventFrom').text(response.from);
                 $('#showEventModal').find('#eventTo').text(response.to);
                 $('#showEventModal').find('#eventMaxPlayer').text(response.max_player);
-
-
-
                 $('#showEventModal').find('#enroll').click(function () {
                     var eventId = event.id;
                     var eventUrl = '{{ route("enroll", ":eventId") }}';
@@ -240,7 +244,7 @@ $(document).ready(function () {
                 });
             },
           
-            
+     
             
         });
  
@@ -296,6 +300,7 @@ $(document).ready(function () {
                     start: start,
                     end: end,
                     allDay: true
+                
                 }, true);
                 
                 calendar.fullCalendar('unselect');

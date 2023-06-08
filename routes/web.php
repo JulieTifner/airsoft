@@ -24,6 +24,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function() {
     Route::put('/users/{user}', [App\Http\Controllers\UserController::class, 'update'])->name('users.update'); 
 });
 
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
