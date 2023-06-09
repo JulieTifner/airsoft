@@ -32,7 +32,7 @@ class EventController extends Controller
     public function show(Request $request)
     {
         $id = $request->input('eventId');
-        $event = Event::find($id);
+        $event = Event::with('map')->find($id);
         
         if (!$event) {
             return response()->json(['error' => 'Event not found'], 404);

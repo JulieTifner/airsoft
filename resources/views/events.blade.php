@@ -2,6 +2,7 @@
 <html>
 @extends('layouts.app')
 @section('content')
+
 <div class="container mt-5">
     <div id='calendar'></div>
 </div>
@@ -94,16 +95,48 @@
             </div>
             <div class="modal-body">
                 <form id="eventForm">
-                    {{-- <div class="form-group">
-                        <label for="eventTitle"><strong>Titel</strong></label>
-                        <p class="" id="eventTitle" name="title"></p>
-                    </div> --}}
                     <div class="form-group">
-                        <label for="eventTitle"><strong>Beschreibung</strong></label>
+                        <label for="eventDeadline" class="font-weight-bold">Beschreibung</label>
                         <p class="" id="eventDescription" name="description"></p>
                     </div>
-                  
+                    @if(auth()->check())
+                    @if(auth()->user()->role_id==1)
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label for="eventDeadline" class="font-weight-bold">Map</label>
+                                    <p class="card-text" id="eventMap" name="map_id"></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventCost" class="font-weight-bold">Preis (CHF)</label>
+                                <p type="text" class="card-text" id="eventCost" name="cost"></p>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventFrom" class="font-weight-bold">Von</label>
+                                <p type="time" class="card-text" id="eventFrom" name="from"></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="eventDeadline" class="font-weight-bold">Art</label>
+                                <p class="card-text" id="eventType" name="from">Outdoor</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventMeeting" class="font-weight-bold">Anz. Plätze</label>
+                                <p type="number" class="card-text" id="eventMaxPlayer" name="max_player"></p>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventTo" class="font-weight-bold">Bis</label>
+                                <p type="time" class="card-text" id="eventTo" name="to"></p>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+                    @endif
                 </form>
+                
             </div>
             <div class="modal-footer">
                 @if(auth()->check())
@@ -133,6 +166,7 @@
         </div>
     </div>
 </div>
+
 
 
 
@@ -217,6 +251,8 @@ $(document).ready(function () {
             success: function (response) {
                 $('#showEventModal').find('#eventModalLabel').text(response.title);
                 $('#showEventModal').find('#eventDescription').text(response.description);
+                $('#showEventModal').find('#eventMap').text(response.map.name);
+                $('#showEventModal').find('#eventType').text(response.type);
                 $('#showEventModal').find('#eventCost').text(response.cost);
                 $('#showEventModal').find('#eventFrom').text(response.from);
                 $('#showEventModal').find('#eventTo').text(response.to);
@@ -229,6 +265,11 @@ $(document).ready(function () {
                 });
                 $('#showEventModal').modal('show');
 
+                if (response.type == 1) {
+                    $('#showEventModal').find('#eventType').text('Outdoor');
+                }else{
+                    $('#showEventModal').find('#eventType').text('Indoor');
+                }
             },
             error: function (xhr, status, error) {
                 console.log(error);
