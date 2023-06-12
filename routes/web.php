@@ -24,6 +24,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function() {
     Route::put('/users/{user}', [App\Http\Controllers\UserController::class, 'update'])->name('users.update'); 
 });
 
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -32,8 +33,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/events', [App\Http\Controllers\EventController::class, 'index'])->name('events');
 Route::get('/event', [App\Http\Controllers\EventController::class, 'show'])->name('show');
 Route::post('/update', [App\Http\Controllers\EventController::class, 'update'])->name('update');
-Route::get('/enroll/{event}', [App\Http\Controllers\EventController::class, 'enroll'])->name('enroll');
-
-
+Route::get('/enroll/{event}', [App\Http\Controllers\EventController::class, 'enroll'])->name('enroll')->middleware('isVerified');
 Route::post('fullcalenderAjax', [App\Http\Controllers\EventController::class, 'ajax']);
+
+
 

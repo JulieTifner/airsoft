@@ -5,7 +5,9 @@
     box-sizing: border-box;
   }
 
-
+.container{
+  margin-top: 30px;
+}
 /* navbar */
 .navbar {
   background-color: black;
@@ -17,6 +19,7 @@
   color: white;
 
 }
+
 
 .navbar img {
   height: 40px; 
@@ -102,7 +105,7 @@
 }
 
 .box .btn-group a{
-  background-color: rgb(235, 235, 2); 
+  background-color: rgb(255, 255, 4); 
   color: black; 
   padding: 15px 25px 15px 25px;
   font-size: 15pt;
@@ -150,3 +153,7 @@
   background-repeat: no-repeat;
   width: 100%;
 }
+
+
+/* enroll */
+

@@ -1,7 +1,9 @@
+<!DOCTYPE html>
+<html>
 @extends('layouts.app')
-
 @section('content')
-<div class="container">
+
+<div class="container mt-5">
     <div id='calendar'></div>
 </div>
 
@@ -25,36 +27,45 @@
                             </div>
                             <div class="form-group">
                                 <label for="eventDescription">Beschreibung</label>
-                                <input type="text" class="form-control" id="eventDescription" name="description">
+                                <textarea name="description" id="eventDescription" cols="30" rows="4" class="form-control"></textarea>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="eventCost">Preis</label>
+                                        <div class="form-group">
+                                            <label for="eventDeadline">Map</label>
+                                            <select class="form-control" id="eventMap" name="map_id">
+                                                @foreach($maps as $map)
+                                                    <option value="{{ $map->id }}">{{ $map->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="eventCost">Preis (CHF)</label>
                                         <input type="text" class="form-control" id="eventCost" name="cost">
                                     </div>
                                     <div class="form-group">
-                                        <label for="eventDeadline">Ort</label>
-                                        <input type="text" class="form-control" id="eventDeadline" name="deadline">
-                                    </div>
-                                    <div class="form-group">
                                         <label for="eventFrom">Von</label>
-                                        <input type="text" class="form-control" id="eventFrom" name="from">
+                                        <input type="time" class="form-control" id="eventFrom" name="from">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label for="eventDeadline">Art</label>
+                                        <select class="form-control" id="eventType" name="type">
+                                            <option value="spiel">Spiel</option>
+                                            <option value="training">Training</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="eventMeeting">Anz. Plätze</label>
-                                        <input type="text" class="form-control" id="eventMeeting" name="meeting">
+                                        <input type="number" class="form-control" id="eventMaxPlayer" name="max_player">
                                     </div>
                                 
                                     <div class="form-group">
-                                        <label for="eventType">Art</label>
-                                        <input type="dropdown" class="form-control" id="eventType" name="type">
-                                    </div>
-                                    <div class="form-group">
                                         <label for="eventTo">Bis</label>
-                                        <input type="text" class="form-control" id="eventTo" name="to">
+                                        <input type="time" class="form-control" id="eventTo" name="to">
                                     </div>
                                 </div>
                             </div>
@@ -85,18 +96,47 @@
             <div class="modal-body">
                 <form id="eventForm">
                     <div class="form-group">
-                        <label for="eventTitle"><strong>Titel</strong></label>
-                        <p class="" id="eventTitle" name="title"></p>
-                    </div>
-                    <div class="form-group">
-                        <label for="eventTitle"><strong>Beschreibung</strong></label>
+                        <label for="eventDeadline" class="font-weight-bold">Beschreibung</label>
                         <p class="" id="eventDescription" name="description"></p>
                     </div>
-                    <div class="form-group">
-                        <label for="eventTitle"><strong>Preis</strong></label>
-                        <p class="" id="eventCost" name="cost"></p>
+                    @if(auth()->check())
+                    @if(auth()->user()->role_id==1)
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label for="eventDeadline" class="font-weight-bold">Map</label>
+                                    <p class="card-text" id="eventMap" name="map_id"></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventCost" class="font-weight-bold">Preis (CHF)</label>
+                                <p type="text" class="card-text" id="eventCost" name="cost"></p>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventFrom" class="font-weight-bold">Von</label>
+                                <p type="time" class="card-text" id="eventFrom" name="from"></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="eventDeadline" class="font-weight-bold">Art</label>
+                                <p class="card-text" id="eventType" name="from">Outdoor</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventMeeting" class="font-weight-bold">Anz. Plätze</label>
+                                <p type="number" class="card-text" id="eventMaxPlayer" name="max_player"></p>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventTo" class="font-weight-bold">Bis</label>
+                                <p type="time" class="card-text" id="eventTo" name="to"></p>
+                            </div>
+                        </div>
                     </div>
+                    @endif
+                    @endif
                 </form>
+                
             </div>
             <div class="modal-footer">
                 @if(auth()->check())
@@ -111,6 +151,9 @@
                         </button>
                         @else
                             <p>Du bist nicht verifiziert</p>
+                            <button type="button" class="btn btn-primary" id="enroll" disabled>
+                                Anmelden
+                            </button>     
                         @endif
                   @endif
                   @else
@@ -126,7 +169,10 @@
 
 
 
+
+<script src='fullcalendar/lang-all.js'></script>
 <script>
+
 $(document).ready(function () {
  
     var SITEURL = "{{ url('/') }}";
@@ -145,16 +191,22 @@ $(document).ready(function () {
         selectable: true,
         selectHelper: true,
         eventRender: function (event, element, view) {
+            
             if (event.allDay === 'true') {
                 event.allDay = true;
             } else {
                 event.allDay = false;
             }
+            element.css('background-color', '#8ab586'); 
+
+            element.css('border', '1px solid #8ab586'); 
+
+            element.css('color', '#000000'); 
+
         },
         select: function (start, end, allDay) {
-            // Open the Bootstrap Modal when a date is selected
             $('#eventModal').modal('show');
-            $('#eventModal').data('eventStart', start); // Speichere den Startzeitpunkt im Modal
+            $('#eventModal').data('eventStart', start); 
 
             $('#eventModal').find('.close').click(function() {
                 $('#eventModal').modal('hide');
@@ -172,7 +224,11 @@ $(document).ready(function () {
                 url: SITEURL + '/fullcalenderAjax',
                 data: {
                     title: event.title,
-                    description: event.description,       
+                    description: event.description,
+                    cost: cost,
+                    from: from,
+                    to: to,
+                    max_player: max_player,  
                     start: start,
                     end: end,
                     id: event.id,
@@ -193,9 +249,14 @@ $(document).ready(function () {
             },
             type: 'GET',
             success: function (response) {
-                $('#showEventModal').find('#eventTitle').text(response.title);
+                $('#showEventModal').find('#eventModalLabel').text(response.title);
                 $('#showEventModal').find('#eventDescription').text(response.description);
+                $('#showEventModal').find('#eventMap').text(response.map.name);
+                $('#showEventModal').find('#eventType').text(response.type);
                 $('#showEventModal').find('#eventCost').text(response.cost);
+                $('#showEventModal').find('#eventFrom').text(response.from);
+                $('#showEventModal').find('#eventTo').text(response.to);
+                $('#showEventModal').find('#eventMaxPlayer').text(response.max_player);
                 $('#showEventModal').find('#enroll').click(function () {
                     var eventId = event.id;
                     var eventUrl = '{{ route("enroll", ":eventId") }}';
@@ -203,8 +264,12 @@ $(document).ready(function () {
                     window.location.href = eventUrl;
                 });
                 $('#showEventModal').modal('show');
-                    // redirectToEnroll(event.id);
-                console.log(eventId)
+
+                if (response.type == 1) {
+                    $('#showEventModal').find('#eventType').text('Outdoor');
+                }else{
+                    $('#showEventModal').find('#eventType').text('Indoor');
+                }
             },
             error: function (xhr, status, error) {
                 console.log(error);
@@ -221,25 +286,40 @@ $(document).ready(function () {
                 });
             },
           
-            
+            firstDay: 1,
             
         });
  
-
-    // Handle the click event of the Save button inside the modal
     $('#saveEvent').click(function () {
         var title = $('#eventModal').find('#eventTitle').val();
         var description = $('#eventModal').find('#eventDescription').val();
         var cost = $('#eventModal').find('#eventCost').val();
+        var from = $('#eventModal').find('#eventFrom').val();
+        var to = $('#eventModal').find('#eventTo').val();
+        var max_player = $('#eventModal').find('#eventMaxPlayer').val();
+        var gameType = $('#eventModal').find('#eventType').val(); 
+        var map_id= $('#eventModal').find('#eventMap').val();
         var start = $('#eventModal').data('eventStart'); 
         var end = moment(start).endOf('day'); 
 
+        console.log(map_id);
+
+        if (gameType  === 'spiel') {
+            gameType  = 1;
+        } else if (gameType === 'training') {
+            gameType = 0;
+        }
         $.ajax({
             url: SITEURL + "/fullcalenderAjax",
             data: {
                 title: title,
                 description: description,
                 cost: cost,
+                from: from,
+                to: to,
+                max_player: max_player,
+                gameType: gameType,
+                map_id: map_id,
                 start: start.format('YYYY-MM-DD'),
                 end: end.format('YYYY-MM-DD'),
                 type: 'add'
@@ -247,22 +327,26 @@ $(document).ready(function () {
             type: "POST",
             success: function (data) {
                 displayMessage("Event Created Successfully");
-
+                
                 calendar.fullCalendar('renderEvent', {
                     id: data.id,
                     title: title,
                     description: description,
                     cost: cost,
+                    from: from,
+                    to: to,
+                    max_player: max_player,
+                    gameType: gameType,
                     start: start,
                     end: end,
                     allDay: true
+                
                 }, true);
-
+                
                 calendar.fullCalendar('unselect');
             }
         });
 
-        // Hide the modal after saving
         $('#eventModal').modal('hide');
     });
 

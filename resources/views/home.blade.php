@@ -24,8 +24,8 @@
   // Hintergrundbilder für die Diashow
   var backgroundImages = [
     'https://images.hdqwalls.com/wallpapers/call-of-duty-mobile-4k-game-2019-3a.jpg',
-    'https://c4.wallpaperflare.com/wallpaper/962/231/806/airsoft-wallpaper-preview.jpg',
-    'https://img.freepik.com/premium-photo/portrait-airsoft-player-professional-equipment-with-machine-gun-abandoned-ruined-building-soldier-with-weapons-war-smoke-fog_154092-2407.jpg'
+    'https://images.pexels.com/photos/3706636/pexels-photo-3706636.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    'https://cutewallpaper.org/23/airsoft-logo-wallpaper/391520302.jpg'
   ];
   
   // Index des aktuellen Hintergrundbilds

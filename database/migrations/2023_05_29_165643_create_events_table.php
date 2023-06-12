@@ -18,10 +18,15 @@ return new class extends Migration
             $table->decimal('cost');
             $table->date('start');
             $table->date('end');
+            $table->time('from');
+            $table->time('to');
+            $table->integer('max_player');
+            $table->boolean('type');
 
-            // $table->unsignedBigInteger('type_id');
+            
+            $table->unsignedBigInteger('map_id');
 
-            // $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
+            $table->foreign('map_id')->references('id')->on('maps');
 
             $table->timestamps();
         });

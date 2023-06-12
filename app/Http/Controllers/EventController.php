@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Models\Map;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
     public function index(Request $request)
     {
+        $maps = Map::all();
+
         if($request->ajax()) {
             
             $data = Event::whereDate('start', '>=', $request->start)
@@ -18,15 +21,18 @@ class EventController extends Controller
             
             return response()->json($data);
         }
-        return view('events');
-        }
+        return view('events')->with([
+            'maps' => $maps, 
+        ]);
+        
+    }
  
 
 
     public function show(Request $request)
     {
         $id = $request->input('eventId');
-        $event = Event::find($id);
+        $event = Event::with('map')->find($id);
         
         if (!$event) {
             return response()->json(['error' => 'Event not found'], 404);
@@ -66,12 +72,16 @@ public function update(Request $request)
     public function enroll($eventId)
     {
         $event = Event::find($eventId);
+        $maps = Map::all();
     
         if (!$event) {
             return abort(404);
         }
     
-        return view('enroll', compact('event'));
+        return view('enroll')->with([
+            'event' => $event,
+            'maps' => $maps,
+        ]);
     }
 
     /**
@@ -81,27 +91,39 @@ public function update(Request $request)
      */
     public function ajax(Request $request)
     {
- 
         switch ($request->type) {
-           case 'add':
-              $event = Event::create([
+            case 'add':
+                $gameType = ($request->gameType == 1) ? true : false;
+                $event = Event::create([
                   'title' => $request->title,
                   'description' => $request->description,
                   'cost' => $request->cost,
                   'start' => $request->start,
                   'end' => $request->end,
-              ]);
- 
-              return response()->json($event);
+                  'from' => $request->from,
+                  'to' => $request->to,
+                  'max_player' => $request->max_player,
+                  'type' => $gameType,
+                  'map_id' => $request->map_id
+
+                ]);
+                
+                
+                return response()->json($event);
              break;
   
            case 'update':
               $event = Event::find($request->id)->update([
-                  'title' => $request->title,
-                  'description' => $request->description,
-                  'cost' => $request->cost,
-                  'start' => $request->start,
-                  'end' => $request->end,
+                'title' => $request->title,
+                'description' => $request->description,
+                'cost' => $request->cost,
+                'start' => $request->start,
+                'end' => $request->end,
+                'from' => $request->from,
+                'to' => $request->to,
+                'max_player' => $request->max_player,
+                'type' => $request->type,
+
               ]);
  
               return response()->json($event);
