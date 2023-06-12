@@ -45,7 +45,12 @@
                       <button type="button" class="btn btn-primary">
                         <a href="{{ route('users.edit',$user->id) }}" style="color:white;">Edit</a>
                       </button>
-                      <button type="button" class="btn btn-danger">Delete</button>
+                      <form action="{{ route('users.delete', $user->id) }}" method="POST" style="display:inline;">
+                        @method('DELETE')
+                          @csrf                      
+                          <button type="submit" class="btn btn-danger" style="color:white;">Löschen</button>
+                      </form>
+                    
                       @if($user->verified == 0)
                         @if($user->role_id == 2 || $user->role_id ==3)
                             <form action="{{ route('users.approve',$user->id) }}" method="POST" style="display: inline;">

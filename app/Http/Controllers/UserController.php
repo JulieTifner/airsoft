@@ -49,6 +49,15 @@ class UserController extends Controller
         return redirect()->route('userlist')->with('success', 'Rolle erfolgreich aktualisiert.');
     }
 
+    public function delete(Request $request, $id)
+    {
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->route('userlist')->with('success', 'Benutzer wurde entfernt');
+
+    }
+
+
     public function approve(Request $request, User $user)
     {
         $user->verified = true;
