@@ -84,6 +84,21 @@ public function update(Request $request)
         ]);
     }
 
+    public function participate(Event $event, Request $request)
+    {
+        $user = $request->user();
+
+        if ($user->events->contains($event->id)) {
+            return redirect('/events')->with('message', 'Du bist bereits angemeldet');
+
+        } else {
+            
+            $user->events()->attach($event->id);
+            return redirect('/events')->with('message', 'Anmeldung erfolgreich');
+
+        }
+    }
+
     /**
      * Write code on Method
      *

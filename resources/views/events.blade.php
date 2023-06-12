@@ -4,6 +4,11 @@
 @section('content')
 
 <div class="container mt-5">
+    @if (session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
     <div id='calendar'></div>
 </div>
 
@@ -144,6 +149,8 @@
                         {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
                         <button type="button" class="btn btn-primary" id="saveEvent">Bearbeiten</button>
                         <button type="button" class="btn btn-danger" id="saveEvent">Löschen</button>
+                        <button type="button" class="btn btn-success" id="userEvent">Anmeldungen</button>
+
                     @elseif(auth()->user()->role_id==2 || auth()->user()->role_id==3)
                         @if(auth()->user()->verified == true)
                         <button type="button" class="btn btn-primary enroll-button" id="enroll">
