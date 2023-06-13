@@ -147,7 +147,7 @@
                 @if(auth()->check())
                     @if(auth()->user()->role_id==1)
                         {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
-                        <button type="button" class="btn btn-primary" id="saveEvent">Bearbeiten</button>
+                        <button type="button" class="btn btn-primary" id="editEvent">Bearbeiten</button>
                         <button type="button" class="btn btn-danger" id="deleteEvent">Löschen</button>
                         <button type="button" class="btn btn-success" id="userEvent">Anmeldungen</button>
 
@@ -174,10 +174,114 @@
     </div>
 </div>
 
+<!-- User enrollment Modal -->
+<div class="modal fade" id="userEnrollmentModal" tabindex="-1" role="dialog" aria-labelledby="userEnrollmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userEnrollmentModalLabel">Anmeldungen</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Schließen</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+{{-- Edit Event --}}
+<div class="modal fade" id="editEventModal" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eventModalLabel">Event Erfassen</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="eventForm">
+                    <div class="form-group">
+                        <label for="eventTitle">Titel</label>
+                        <input type="text" class="form-control" id="eventTitle" name="title">
+                    </div>
+                    <div class="form-group">
+                        <label for="eventDescription">Beschreibung</label>
+                        <textarea name="description" id="eventDescription" cols="30" rows="4" class="form-control"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label for="eventDeadline">Map</label>
+                                    <select class="form-control" id="eventMap" name="map_id">
+                                        @foreach($maps as $map)
+                                            <option value="{{ $map->id }}">{{ $map->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventCost">Preis (CHF)</label>
+                                <input type="text" class="form-control" id="eventCost" name="cost">
+                            </div>
+                            <div class="form-group">
+                                <label for="eventFrom">Von</label>
+                                <input type="time" class="form-control" id="eventFrom" name="from">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="eventDeadline">Art</label>
+                                <select class="form-control" id="eventType" name="type">
+                                    <option value="spiel">Spiel</option>
+                                    <option value="training">Training</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventMeeting">Anz. Plätze</label>
+                                <input type="number" class="form-control" id="eventMaxPlayer" name="max_player">
+                            </div>
+                        
+                            <div class="form-group">
+                                <label for="eventTo">Bis</label>
+                                <input type="time" class="form-control" id="eventTo" name="to">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveEvent">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-
-<script src='fullcalendar/lang-all.js'></script>
 <script>
     $(document).ready(function () {
 
@@ -284,39 +388,55 @@
 
                 $('#showEventModal').find('.close').click(function () {
                     $('#showEventModal').modal('hide');
-
                 });
+
                 $('#showEventModal').find('.modal-footer .btn-secondary').click(function () {
                     $('#showEventModal').modal('hide');
                 });
 
-        // Delete
-
-        function deleteEvent(event) {
-                    var deleteMsg = confirm("Event wirklich löschen?");
-                    if (deleteMsg) {
-                        $.ajax({
-                            type: "POST",
-                            url: SITEURL + '/fullcalenderAjax',
-                            data: {
-                                id: event.id,
-                                type: 'delete'
-                            },
-                            success: function (response) {
-                                calendar.fullCalendar('removeEvents', event.id);
-                                displayMessage("Event Deleted Successfully");
-                            }
-                        });
-                    }
-                }
-                $('#showEventModal').data('event', event); 
-                $('#deleteEvent').click(function () {
-                    var event = $('#showEventModal').data('event');
-                    deleteEvent(event);
-                    $('#showEventModal').modal('hide');
+                $('#userEnrollmentModal').find('.modal-footer .btn-secondary').click(function () {
+                    $('#userEnrollmentModal').modal('hide');
                 });
 
+                $('#editEventModal').find('.modal-footer .btn-secondary').click(function () {
+                    $('#editEventModal').modal('hide');
+                });
 
+                $('#showEventModal').find('#userEvent').click(function () {
+                    $('#showEventModal').modal('hide');
+                    $('#userEnrollmentModal').modal('show');
+                });
+
+                $('#showEventModal').find('#editEvent').click(function () {
+                    $('#showEventModal').modal('hide');
+                    $('#editEventModal').modal('show');
+                });
+                // Delete
+
+                function deleteEvent(event) {
+                            var deleteMsg = confirm("Event wirklich löschen?");
+                            if (deleteMsg) {
+                                $.ajax({
+                                    type: "POST",
+                                    url: SITEURL + '/fullcalenderAjax',
+                                    data: {
+                                        id: event.id,
+                                        type: 'delete'
+                                    },
+                                    success: function (response) {
+                                        calendar.fullCalendar('removeEvents', event.id);
+                                        displayMessage("Event Deleted Successfully");
+                                    }
+                                });
+                            }
+                        }
+
+                    $('#showEventModal').data('event', event); 
+                    $('#deleteEvent').click(function () {
+                        var event = $('#showEventModal').data('event');
+                        deleteEvent(event);
+                        $('#showEventModal').modal('hide');
+                    });
 
             },
 

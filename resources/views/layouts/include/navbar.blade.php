@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="{{ url('/css/app.css') }}" rel="stylesheet">
+    {{-- <link href="{{ url('/css/app.css') }}" rel="stylesheet"> --}}
     
 </head>
 <style>
