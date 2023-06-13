@@ -106,6 +106,7 @@ public function update(Request $request)
      */
     public function ajax(Request $request)
     {
+
         switch ($request->type) {
             case 'add':
                 $gameType = ($request->gameType == 1) ? true : false;
