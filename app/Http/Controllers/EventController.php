@@ -32,8 +32,7 @@ class EventController extends Controller
     public function show(Request $request)
     {
         $id = $request->input('eventId');
-        $event = Event::find($id);
-        $map = Map::find($id);
+        $event = Event::with('map')->find($id);
         
         if (!$event) {
             return response()->json(['error' => 'Event not found'], 404);
@@ -85,6 +84,21 @@ public function update(Request $request)
         ]);
     }
 
+    public function participate(Event $event, Request $request)
+    {
+        $user = $request->user();
+
+        if ($user->events->contains($event->id)) {
+            return redirect('/events')->with('message', 'Du bist bereits angemeldet');
+
+        } else {
+            
+            $user->events()->attach($event->id);
+            return redirect('/events')->with('message', 'Anmeldung erfolgreich');
+
+        }
+    }
+
     /**
      * Write code on Method
      *
@@ -92,6 +106,7 @@ public function update(Request $request)
      */
     public function ajax(Request $request)
     {
+
         switch ($request->type) {
             case 'add':
                 $gameType = ($request->gameType == 1) ? true : false;

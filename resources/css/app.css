@@ -9,6 +9,15 @@
   margin-top: 30px;
 }
 /* navbar */
+
+
+    /* CSS-Regel für den Link */
+    .nav-link.current {
+        color: rgb(255, 255, 2);
+    }
+
+
+
 .navbar {
   background-color: black;
   height: 100px; 

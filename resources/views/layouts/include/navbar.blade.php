@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="{{ url('/css/app.css') }}" rel="stylesheet">
+    {{-- <link href="{{ url('/css/app.css') }}" rel="stylesheet"> --}}
     
 </head>
 <style>
@@ -13,17 +13,18 @@
   <nav class="navbar">
     <div>
       <img src="" alt="Logo">
-      <span class="slogan">CIVILIAN ARMED FORCES</span>
+      <a href="{{ route('home') }}" style="color: white; text-decoration: none;">
+        <span class="slogan">CIVILIAN ARMED FORCES</span>
+      </a>
     </div>
        
     <ul>
-      <li><a class="nav-link" href="{{ route('home') }}" style="color: rgb(255, 255, 2);">Home</a></li>
-      <li><a class="nav-link" href="{{ route('events') }}">Events</a></li>
+      <li><a class="nav-link {{ request()->routeIs('events') ? ' current' : '' }}" href="{{ route('events') }}">Events</a></li>
       <li><a class="nav-link" href="#">Über uns</a></li>
       <li><a class="nav-link" href="#">Kontakt</a></li>
       @if(auth()->check())
         @if(auth()->user()->role_id==1 || auth()->user()->role_id==2)
-      <li><a class="nav-link" href="{{ route('userlist') }}">Benutzer</a></li>
+      <li><a class="nav-link {{ request()->routeIs('userlist') ? ' current' : '' }}"  href="{{ route('userlist') }}">Benutzer</a></li>
         @endif
       @endif
       <li><a class="nav-link" href="#">FAQ</a></li>

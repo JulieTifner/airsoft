@@ -76,9 +76,13 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <a href="#" class="btn btn-primary">Anmelden</a>
-            </div>
+            <form action="{{ route('participate', $event->id) }}" method="post">
+                @csrf
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Anmelden</button>
+                </div>
+            </form>
+            
         </div>
     </div>
     

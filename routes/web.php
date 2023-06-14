@@ -22,6 +22,10 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function() {
     Route::get('/users/{user}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('users.edit');
     Route::put('/users/{user}/approve', [App\Http\Controllers\UserController::class, 'approve'])->name('users.approve');    
     Route::put('/users/{user}', [App\Http\Controllers\UserController::class, 'update'])->name('users.update'); 
+    Route::delete('/users/{user}', [App\Http\Controllers\UserController::class, 'delete'])->name('users.delete'); 
+    Route::delete('/event/{event}', [App\Http\Controllers\EventController::class, 'delete'])->name('event.delete'); 
+
+
 });
 
 
@@ -35,6 +39,8 @@ Route::get('/event', [App\Http\Controllers\EventController::class, 'show'])->nam
 Route::post('/update', [App\Http\Controllers\EventController::class, 'update'])->name('update');
 Route::get('/enroll/{event}', [App\Http\Controllers\EventController::class, 'enroll'])->name('enroll')->middleware('isVerified');
 Route::post('fullcalenderAjax', [App\Http\Controllers\EventController::class, 'ajax']);
+Route::post('participate/{event}', [App\Http\Controllers\EventController::class, 'participate'])->name('participate');
+
 
 
 
