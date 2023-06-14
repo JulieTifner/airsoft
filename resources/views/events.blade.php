@@ -147,9 +147,9 @@
                 @if(auth()->check())
                 @if(auth()->user()->role_id==1)
                 {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
+                <button type="button" class="btn btn-success" id="userEvent">Anmeldungen</button>
                 <button type="button" class="btn btn-primary" id="editEvent">Bearbeiten</button>
                 <button type="button" class="btn btn-danger" id="deleteEvent">Löschen</button>
-                <button type="button" class="btn btn-success" id="userEvent">Anmeldungen</button>
 
                 @elseif(auth()->user()->role_id==2 || auth()->user()->role_id==3)
                 @if(auth()->user()->verified == true)
@@ -185,27 +185,24 @@
                 </button>
             </div>
             <div class="modal-body">
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="userList">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
+                            <th scope="col">Vorname</th>
+                            <th scope="col">Nachname</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
+                            <th scope="row"></th>
+                            <td></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Schließen</button>
+                <button type="button" class="btn btn-secondary">Zurück</button>
             </div>
         </div>
     </div>

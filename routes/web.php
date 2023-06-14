@@ -37,9 +37,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/events', [App\Http\Controllers\EventController::class, 'index'])->name('events');
 Route::get('/event', [App\Http\Controllers\EventController::class, 'show'])->name('show');
 Route::post('/update', [App\Http\Controllers\EventController::class, 'update'])->name('update');
-Route::get('/enroll/{event}', [App\Http\Controllers\EventController::class, 'enroll'])->name('enroll')->middleware('isVerified');
 Route::post('fullcalenderAjax', [App\Http\Controllers\EventController::class, 'ajax']);
-Route::post('participate/{event}', [App\Http\Controllers\EventController::class, 'participate'])->name('participate');
+
+Route::get('/enroll/{event}', [App\Http\Controllers\EnrollController::class, 'index'])->name('enroll')->middleware('isVerified');
+Route::post('participate/{event}', [App\Http\Controllers\EnrollController::class, 'create'])->name('participate');
 
 
 

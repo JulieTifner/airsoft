@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\Map;
+use App\Models\User;
+
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -28,17 +30,36 @@ class EventController extends Controller
     }
  
 
+    // public function show(Request $request)
+    // {
+    //     $id = $request->input('eventId');
+    //     $event = Event::with('map')->find($id);
+        
+    //     if (!$event) {
+    //         return response()->json(['error' => 'Event not found'], 404);
+    //     }
+        
+    //     return response()->json($event);
+    // }
+
 
     public function show(Request $request)
     {
         $id = $request->input('eventId');
         $event = Event::with('map')->find($id);
-        
+
+        $eventEnroll = Event::find($id);
+
         if (!$event) {
             return response()->json(['error' => 'Event not found'], 404);
         }
+
+        $userIds = $eventEnroll->users()->pluck('user_id');
+        $users = User::whereIn('id', $userIds)->get();
+    
+        $userNames = $users->pluck('name');
         
-        return response()->json($event);
+        return response()->json(['event' => $event, 'userNames' => $userNames]);
     }
 
 
@@ -66,37 +87,6 @@ public function update(Request $request)
         $event->save();
 
         return response()->json($event);
-    }
-
-
-    public function enroll($eventId)
-    {
-        $event = Event::find($eventId);
-        $maps = Map::all();
-    
-        if (!$event) {
-            return abort(404);
-        }
-    
-        return view('enroll')->with([
-            'event' => $event,
-            'maps' => $maps,
-        ]);
-    }
-
-    public function participate(Event $event, Request $request)
-    {
-        $user = $request->user();
-
-        if ($user->events->contains($event->id)) {
-            return redirect('/events')->with('message', 'Du bist bereits angemeldet');
-
-        } else {
-            
-            $user->events()->attach($event->id);
-            return redirect('/events')->with('message', 'Anmeldung erfolgreich');
-
-        }
     }
 
     /**

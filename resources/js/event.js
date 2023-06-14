@@ -72,14 +72,18 @@ $(document).ready(function() {
               },
               type: 'GET',
               success: function(response) {
-                  $('#showEventModal').find('#eventModalLabel').text(response.title);
-                  $('#showEventModal').find('#eventDescription').text(response.description);
-                  $('#showEventModal').find('#eventMap').text(response.map.name);
-                  $('#showEventModal').find('#eventType').text(response.type);
-                  $('#showEventModal').find('#eventCost').text(response.cost);
-                  $('#showEventModal').find('#eventFrom').text(response.from);
-                  $('#showEventModal').find('#eventTo').text(response.to);
-                  $('#showEventModal').find('#eventMaxPlayer').text(response.max_player);
+                  var event = response.event;
+                  var userNames = response.userNames;
+                  console.log(response.userNames);
+
+                  $('#showEventModal').find('#eventModalLabel').text(event.title);
+                  $('#showEventModal').find('#eventDescription').text(event.description);
+                  $('#showEventModal').find('#eventMap').text(event.map.name);
+                  $('#showEventModal').find('#eventType').text(event.type);
+                  $('#showEventModal').find('#eventCost').text(event.cost);
+                  $('#showEventModal').find('#eventFrom').text(event.from);
+                  $('#showEventModal').find('#eventTo').text(event.to);
+                  $('#showEventModal').find('#eventMaxPlayer').text(event.max_player);
                   $('#showEventModal').find('#enroll').click(function() {
                       var eventId = event.id;
                       var eventUrl = SITEURL + '/enroll/' + event.id;
@@ -93,6 +97,18 @@ $(document).ready(function() {
                   } else {
                       $('#showEventModal').find('#eventType').text('Indoor');
                   }
+
+                var userList = $('#showEventModal').find('#userList');
+                // userList.empty();
+
+                $.each(userNames, function(index, userName) {
+                    var tableRow = $('<tr>');
+                    tableRow.append($('<th>').text(index + 1));
+                    tableRow.append($('<td>').text(userName));
+
+                    userList.append(tableRow);
+                });
+                  
               },
               error: function(xhr, status, error) {
                   console.log(error);
@@ -108,7 +124,9 @@ $(document).ready(function() {
           });
 
           $('#userEnrollmentModal').find('.modal-footer .btn-secondary').click(function() {
-              $('#userEnrollmentModal').modal('hide');
+            $('#showEventModal').modal('show');
+            $('#userEnrollmentModal').modal('hide');
+
           });
 
           $('#editEventModal').find('.modal-footer .btn-secondary').click(function() {
