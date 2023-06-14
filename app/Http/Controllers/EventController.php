@@ -33,6 +33,7 @@ class EventController extends Controller
     {
         $id = $request->input('eventId');
         $event = Event::find($id);
+        $map = Map::find($id);
         
         if (!$event) {
             return response()->json(['error' => 'Event not found'], 404);

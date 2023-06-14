@@ -94,15 +94,54 @@
             </div>
             <div class="modal-body">
                 <form id="eventForm">
-                    {{-- <div class="form-group">
-                        <label for="eventTitle"><strong>Titel</strong></label>
-                        <p class="" id="eventTitle" name="title"></p>
-                    </div> --}}
+                  
                     <div class="form-group">
-                        <label for="eventTitle"><strong>Beschreibung</strong></label>
                         <p class="" id="eventDescription" name="description"></p>
                     </div>
-                  
+                    @if(auth()->check())
+                        @if(auth()->user()->role_id==1)
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label for="eventDeadline">Map</label>
+                                        <p type="text" class="form-control" id="eventMap" name="map_id"></p>
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="eventCost">Preis (CHF)</label>
+                                    <p type="text" class="form-control" id="eventCost" name="cost"></p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="eventFrom">Von</label>
+                                    <p type="time" class="form-control" id="eventFrom" name="from"></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="eventDeadline">Art</label>
+                                    <p class="form-control" id="eventType" name="type"></p>
+                                    {{-- <select class="form-control" id="eventType" name="type">
+                                        <option value="spiel">Spiel</option>
+                                        <option value="training">Training</option>
+                                    </select> --}}
+                                </div>
+                                <div class="form-group">
+                                    <label for="eventMeeting">Anz. Plätze</label>
+                                    <p type="number" class="form-control" id="eventMaxPlayer" name="max_player"></p>
+                                </div>
+                            
+                                <div class="form-group">
+                                    <label for="eventTo">Bis</label>
+                                    <p type="time" class="form-control" id="eventTo" name="to"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        @endif
+                    @endif
                 </form>
             </div>
             <div class="modal-footer">
@@ -217,6 +256,7 @@ $(document).ready(function () {
             success: function (response) {
                 $('#showEventModal').find('#eventModalLabel').text(response.title);
                 $('#showEventModal').find('#eventDescription').text(response.description);
+                $('#showEventModal').find('#eventMap').text(response.map_id);
                 $('#showEventModal').find('#eventCost').text(response.cost);
                 $('#showEventModal').find('#eventFrom').text(response.from);
                 $('#showEventModal').find('#eventTo').text(response.to);
@@ -229,12 +269,12 @@ $(document).ready(function () {
                 });
                 $('#showEventModal').modal('show');
 
+                console.log(response.type);
             },
             error: function (xhr, status, error) {
                 console.log(error);
             }
         });
-        
 
             $('#showEventModal').find('.close').click(function() {
                     $('#showEventModal').modal('hide');
@@ -243,7 +283,7 @@ $(document).ready(function () {
                 $('#showEventModal').find('.modal-footer .btn-secondary').click(function() {
                     $('#showEventModal').modal('hide');
                 });
-            },
+        },
           
             firstDay: 1,
             
