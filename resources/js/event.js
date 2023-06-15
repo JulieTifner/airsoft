@@ -74,7 +74,6 @@ $(document).ready(function() {
               success: function(response) {
                   var event = response.event;
                   var userNames = response.userNames;
-                  console.log(response.userNames);
 
                   $('#showEventModal').find('#eventModalLabel').text(event.title);
                   $('#showEventModal').find('#eventDescription').text(event.description);
@@ -98,10 +97,11 @@ $(document).ready(function() {
                       $('#showEventModal').find('#eventType').text('Indoor');
                   }
 
-                var userList = $('#showEventModal').find('#userList');
+                var userList = $('#userEnrollmentModal').find('#userList');
                 // userList.empty();
 
                 $.each(userNames, function(index, userName) {
+                    console.log(response.userNames);
                     var tableRow = $('<tr>');
                     tableRow.append($('<th>').text(index + 1));
                     tableRow.append($('<td>').text(userName));

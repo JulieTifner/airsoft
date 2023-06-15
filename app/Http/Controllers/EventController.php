@@ -40,6 +40,8 @@ class EventController extends Controller
     //     }
         
     //     return response()->json($event);
+    // return response()->json(['event' => $event, 'userNames' => $userNames]);
+
     // }
 
 
@@ -47,18 +49,20 @@ class EventController extends Controller
     {
         $id = $request->input('eventId');
         $event = Event::with('map')->find($id);
-
+    
         $eventEnroll = Event::find($id);
-
+    
         if (!$event) {
             return response()->json(['error' => 'Event not found'], 404);
         }
-
+    
         $userIds = $eventEnroll->users()->pluck('user_id');
         $users = User::whereIn('id', $userIds)->get();
     
-        $userNames = $users->pluck('name');
-        
+        $userNames = $users->map(function ($user) {
+            return $user->firstname . ' ' . $user->lastname;
+        });
+    
         return response()->json(['event' => $event, 'userNames' => $userNames]);
     }
 

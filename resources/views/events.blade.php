@@ -189,15 +189,11 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Vorname</th>
-                            <th scope="col">Nachname</th>
+                            <th scope="col">Name</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row"></th>
-                            <td></td>
-                        </tr>
+                        
                     </tbody>
                 </table>
             </div>
