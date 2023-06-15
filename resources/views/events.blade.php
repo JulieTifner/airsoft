@@ -3,12 +3,31 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="container mt-5">
+<div class="container-lg" style="margin: 50px 200px 100px 400px;">
     @if (session('message'))
     <div class="alert alert-success">
         {{ session('message') }}
     </div>
     @endif
+    @if(auth()->check())
+    <div class="row">
+        <div class="col-lg-9 order-1">
+            <div id='calendar'></div>
+        </div>
+        <div class="col-lg-3 order-2" style="margin-top: 55px;">
+            <div class="card" style="width: 100%;">
+                <div class="card-body">
+                    <h5 class="card-title">Deine Anmeldungen</h5>
+                    @foreach($eventData as $event)
+                        <p class="card-text">{{$event}}</p>              
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+
+
     <div id='calendar'></div>
 </div>
 
@@ -274,6 +293,7 @@
         </div>
     </div>
 </div>
+
 
 <script>
     var SITEURL = "{{ url('/') }}";

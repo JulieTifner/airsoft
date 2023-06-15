@@ -98,7 +98,7 @@ $(document).ready(function() {
                   }
 
                 var userList = $('#userEnrollmentModal').find('#userList');
-                // userList.empty();
+                userList.empty();
 
                 $.each(userNames, function(index, userName) {
                     console.log(response.userNames);
@@ -117,6 +117,14 @@ $(document).ready(function() {
 
           $('#showEventModal').find('.close').click(function() {
               $('#showEventModal').modal('hide');
+          });
+
+          $('#userEnrollmentModal').find('.close').click(function() {
+            $('#userEnrollmentModal').modal('hide');
+          });
+
+          $('#editEventModal').find('.close').click(function() {
+            $('#editEventModal').modal('hide');
           });
 
           $('#showEventModal').find('.modal-footer .btn-secondary').click(function() {

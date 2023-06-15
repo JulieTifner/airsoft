@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\Map;
 use App\Models\User;
+use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 
@@ -15,35 +16,33 @@ class EventController extends Controller
     {
         $maps = Map::all();
 
-        if($request->ajax()) {
-            
+        $user = $request->user();
+        $eventData = collect();
+
+        if ($user) {
+            $eventIds = $user->events()->pluck('event_id');
+
+            $events = Event::whereIn('id', $eventIds)->get();
+
+            $eventData = $events->map(function ($event) {
+                $start = Carbon::parse($event->start)->format('d.m.Y');
+                return $event->title . ', ' . $start;
+            });
+        }
+
+        if ($request->ajax()) {
             $data = Event::whereDate('start', '>=', $request->start)
-            ->whereDate('end', '<=', $request->end)
-            ->get(['id', 'title', 'start', 'end']);
-            
+                ->whereDate('end', '<=', $request->end)
+                ->get(['id', 'title', 'start', 'end']);
+
             return response()->json($data);
         }
+
         return view('events')->with([
-            'maps' => $maps, 
+            'maps' => $maps,
+            'eventData' => $eventData,
         ]);
-        
     }
- 
-
-    // public function show(Request $request)
-    // {
-    //     $id = $request->input('eventId');
-    //     $event = Event::with('map')->find($id);
-        
-    //     if (!$event) {
-    //         return response()->json(['error' => 'Event not found'], 404);
-    //     }
-        
-    //     return response()->json($event);
-    // return response()->json(['event' => $event, 'userNames' => $userNames]);
-
-    // }
-
 
     public function show(Request $request)
     {
@@ -51,17 +50,20 @@ class EventController extends Controller
         $event = Event::with('map')->find($id);
     
         $eventEnroll = Event::find($id);
-    
+
         if (!$event) {
             return response()->json(['error' => 'Event not found'], 404);
         }
-    
+
         $userIds = $eventEnroll->users()->pluck('user_id');
         $users = User::whereIn('id', $userIds)->get();
     
         $userNames = $users->map(function ($user) {
             return $user->firstname . ' ' . $user->lastname;
         });
+    
+    
+        
     
         return response()->json(['event' => $event, 'userNames' => $userNames]);
     }
