@@ -91,8 +91,6 @@ $(document).ready(function() {
                 });
                 $('#showEventModal').modal('show');
                 
-                console.log(event.type);
-
                 if (event.type == 1) {
                     $('#showEventModal').find('#eventType').text('Spiel');
                 } else {
@@ -112,27 +110,29 @@ $(document).ready(function() {
 
 
 
-          $('#showEventModal').find('#editEvent').click(function() {
-                $('#editEventModal').find('#eventTitle').val(event.title);
-                $('#editEventModal').find('#eventDescription').val(event.description);
-                $('#editEventModal').find('#eventMap').val(event.map_id);
-                $('#editEventModal').find('#eventCost').val(event.cost);
-                $('#editEventModal').find('#eventFrom').val(event.from);
-                $('#editEventModal').find('#eventTo').val(event.to);
-                $('#editEventModal').find('#eventMaxPlayer').val(event.max_player);
-                $('#editEventModal').find('#eventType').val(event.type);
-                $('#showEventModal').modal('hide');
-                $('#editEventModal').modal('show');
+                $('#showEventModal').find('#editEvent').click(function() {
+                    var eventType = $('#showEventModal').find('#eventType').text();
                 
-                if (event.type == 1) {
-                    console.log('spiel');
-                    $("select").val('Spiel');
-                } else {
-                    console.log('training');
-                    $("select").val('Training');
-
-                }
-            });
+                    console.log(eventType);
+                    $('#editEventModal').find('#eventTitle').val(event.title);
+                    $('#editEventModal').find('#eventDescription').val(event.description);
+                    $('#editEventModal').find('#eventMap').val(event.map_id);
+                    $('#editEventModal').find('#eventCost').val(event.cost);
+                    $('#editEventModal').find('#eventFrom').val(event.from);
+                    $('#editEventModal').find('#eventTo').val(event.to);
+                    $('#editEventModal').find('#eventMaxPlayer').val(event.max_player);
+                    $('#editEventModal').modal('hide');
+                    
+                    if (eventType == 'Spiel') {
+                        $('#editEventModal').find('#eventType option[value="spiel"]').prop('selected', true);
+                    } else {
+                        $('#editEventModal').find('#eventType option[value="training"]').prop('selected', true);
+                    }
+                    
+                    $('#editEventModal').modal('show');
+                });
+                
+                
             
               },
               error: function(xhr, status, error) {
@@ -218,7 +218,6 @@ $(document).ready(function() {
       var map_id = $('#eventModal').find('#eventMap').val();
       var start = $('#eventModal').data('eventStart');
       var end = moment(start).endOf('day');
-      console.log(gameType);
 
 
       if (gameType === 'spiel') {
