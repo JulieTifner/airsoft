@@ -128,7 +128,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="eventModalLabel">Event</h5>
+                <h5 class="modal-title" id="eventModalLabel"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -161,7 +161,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="eventDeadline" class="font-weight-bold">Art</label>
-                                <p class="card-text" id="eventType" name="from">Outdoor</p>
+                                <p class="card-text" id="eventType" name="from"></p>
                             </div>
                             <div class="form-group">
                                 <label for="eventMeeting" class="font-weight-bold">Anz. Plätze</label>
@@ -244,7 +244,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="eventModalLabel">Event Erfassen</h5>
+                <h5 class="modal-title" id="eventModalLabel">Event Bearbeiten</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

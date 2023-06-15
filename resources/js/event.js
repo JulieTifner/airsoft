@@ -72,43 +72,68 @@ $(document).ready(function() {
               },
               type: 'GET',
               success: function(response) {
-                  var event = response.event;
-                  var userNames = response.userNames;
+                var event = response.event;
+                var userNames = response.userNames;
+                
+                $('#showEventModal').find('#eventModalLabel').text(event.title);
+                $('#showEventModal').find('#eventDescription').text(event.description);
+                $('#showEventModal').find('#eventMap').text(event.map.name);
+                $('#showEventModal').find('#eventType').text(event.type);
+                $('#showEventModal').find('#eventCost').text(event.cost);
+                $('#showEventModal').find('#eventFrom').text(event.from);
+                $('#showEventModal').find('#eventTo').text(event.to);
+                $('#showEventModal').find('#eventMaxPlayer').text(event.max_player);
+                $('#showEventModal').find('#enroll').click(function() {
+                    var eventId = event.id;
+                    var eventUrl = SITEURL + '/enroll/' + event.id;
+                    eventUrl = eventUrl.replace(':eventId', eventId);
+                    window.location.href = eventUrl;
+                });
+                $('#showEventModal').modal('show');
+                
+                console.log(event.type);
 
-                  $('#showEventModal').find('#eventModalLabel').text(event.title);
-                  $('#showEventModal').find('#eventDescription').text(event.description);
-                  $('#showEventModal').find('#eventMap').text(event.map.name);
-                  $('#showEventModal').find('#eventType').text(event.type);
-                  $('#showEventModal').find('#eventCost').text(event.cost);
-                  $('#showEventModal').find('#eventFrom').text(event.from);
-                  $('#showEventModal').find('#eventTo').text(event.to);
-                  $('#showEventModal').find('#eventMaxPlayer').text(event.max_player);
-                  $('#showEventModal').find('#enroll').click(function() {
-                      var eventId = event.id;
-                      var eventUrl = SITEURL + '/enroll/' + event.id;
-                      eventUrl = eventUrl.replace(':eventId', eventId);
-                      window.location.href = eventUrl;
-                  });
-                  $('#showEventModal').modal('show');
-
-                  if (response.type == 1) {
-                      $('#showEventModal').find('#eventType').text('Outdoor');
-                  } else {
-                      $('#showEventModal').find('#eventType').text('Indoor');
-                  }
-
+                if (event.type == 1) {
+                    $('#showEventModal').find('#eventType').text('Spiel');
+                } else {
+                    
+                    $('#showEventModal').find('#eventType').text('Training');
+                }
                 var userList = $('#userEnrollmentModal').find('#userList');
                 userList.empty();
 
                 $.each(userNames, function(index, userName) {
-                    console.log(response.userNames);
                     var tableRow = $('<tr>');
                     tableRow.append($('<th>').text(index + 1));
                     tableRow.append($('<td>').text(userName));
 
                     userList.append(tableRow);
                 });
-                  
+
+
+
+          $('#showEventModal').find('#editEvent').click(function() {
+                $('#editEventModal').find('#eventTitle').val(event.title);
+                $('#editEventModal').find('#eventDescription').val(event.description);
+                $('#editEventModal').find('#eventMap').val(event.map_id);
+                $('#editEventModal').find('#eventCost').val(event.cost);
+                $('#editEventModal').find('#eventFrom').val(event.from);
+                $('#editEventModal').find('#eventTo').val(event.to);
+                $('#editEventModal').find('#eventMaxPlayer').val(event.max_player);
+                $('#editEventModal').find('#eventType').val(event.type);
+                $('#showEventModal').modal('hide');
+                $('#editEventModal').modal('show');
+                
+                if (event.type == 1) {
+                    console.log('spiel');
+                    $("select").val('Spiel');
+                } else {
+                    console.log('training');
+                    $("select").val('Training');
+
+                }
+            });
+            
               },
               error: function(xhr, status, error) {
                   console.log(error);
@@ -146,10 +171,8 @@ $(document).ready(function() {
               $('#userEnrollmentModal').modal('show');
           });
 
-          $('#showEventModal').find('#editEvent').click(function() {
-              $('#showEventModal').modal('hide');
-              $('#editEventModal').modal('show');
-          });
+
+
           // Delete
 
           function deleteEvent(event) {
@@ -195,8 +218,8 @@ $(document).ready(function() {
       var map_id = $('#eventModal').find('#eventMap').val();
       var start = $('#eventModal').data('eventStart');
       var end = moment(start).endOf('day');
+      console.log(gameType);
 
-      console.log(map_id);
 
       if (gameType === 'spiel') {
           gameType = 1;
