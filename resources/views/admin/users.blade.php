@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+
+<style>
+
+
+</style>
 <div class="container d-flex flex-column maximus" style="min-height: calc(100vh - 374px);">
   @if (session('success'))
     <div class="alert alert-success">

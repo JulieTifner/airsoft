@@ -59,6 +59,22 @@
 }
 
 @media (max-width: 767px) {
+
+  @media (max-width: 767px) {
+    .table thead {
+      display: none; 
+    }
+    .table tbody td, .table tbody th {
+      display: block; 
+      text-align: left; 
+    }
+    .table tbody td:before {
+      content: attr(data-label); 
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px; 
+    }
+  }
   .navbar .slogan {
     font-size: 11pt; 
     flex-basis: 100%; 
@@ -107,13 +123,13 @@
   .wrapper .box h1 {
     color: rgb(255, 255, 255);
     font-weight: bold;
-    font-size: 14pt;
+    font-size: 22pt;
     padding-bottom: 10px; 
   }
 
   .wrapper .box p {
     color: rgb(255, 255, 255); 
-    font-size: 12pt;
+    font-size: 14pt;
     margin-bottom: 20px; 
   }
 }

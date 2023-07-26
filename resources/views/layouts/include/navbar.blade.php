@@ -12,7 +12,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="{{ route('home') }}">
-      <img src="img/logo.png" alt="Logo">
+      <img src="/img/logo.png">
       <span class="slogan">CIVILIAN ARMED FORCES</span>
     </a>
 
