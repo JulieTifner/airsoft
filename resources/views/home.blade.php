@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="content-wrapper">
-  <img src="https://www.itl.cat/pics/b/31/317166_airsoft-wallpaper.jpg" style="width:470px;" alt="">
+  <img src="https://www.itl.cat/pics/b/31/317166_airsoft-wallpaper.jpg" style="" alt="">
 </div>
   <div class="wrapper">
     <div class="box">

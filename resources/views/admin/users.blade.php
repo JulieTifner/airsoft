@@ -53,7 +53,7 @@
                       <form action="{{ route('users.delete', $user->id) }}" method="POST" style="display:inline;">
                         @method('DELETE')
                           @csrf                      
-                          <button type="submit" class="btn btn-danger" style="color:white;" onclick="confirmDelete('{{ $user->name }}')">Löschen</button>
+                          <button type="submit" class="btn btn-danger" style="color:white;" onclick="confirmDelete('{{ $user->name }}')">Delete</button>
                       </form>
                     
                       @if($user->verified == 0)

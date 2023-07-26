@@ -13,7 +13,7 @@
   }
 
   function startSlideshow() {
-    if (window.innerWidth > 767) {
+    if (window.innerWidth > 800) {
       changeBackgroundImage();
       setInterval(changeBackgroundImage, 5000);
     }

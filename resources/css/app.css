@@ -58,81 +58,6 @@
   font-size: 16pt;
 }
 
-@media (max-width: 767px) {
-
-  @media (max-width: 767px) {
-    .table thead {
-      display: none; 
-    }
-    .table tbody td, .table tbody th {
-      display: block; 
-      text-align: left; 
-    }
-    .table tbody td:before {
-      content: attr(data-label); 
-      font-weight: bold;
-      display: block;
-      margin-bottom: 5px; 
-    }
-  }
-  .navbar .slogan {
-    font-size: 11pt; 
-    flex-basis: 100%; 
-    text-align: center;
-  }
-
-  .btn-group a{
-    text-decoration: none;
-  }
-  .navbar ul li a {
-      font-size: 17pt;
-    }
-
-  .navbar img {
-    height: 80px; 
-    margin-right: 10px; 
-  }
-
-  .content-wrapper{
-    /* margin-top: 290px; */
-    height: 50%;
-  }
-
-  .wrapper {
-    background-color: black;
-    max-width: 900px;
-    margin: 0 auto; 
-    padding: 40px !important; 
-    background-image: none;
-    
-  }
-  
-  .box {
-    padding: 20px;
-    height: 200px !important;
-    width: 100%;
-    max-width: 600px; 
-    margin: 20px auto; 
-    text-align: center !important; 
-    background-color: #000000; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
- 
-
-  .wrapper .box h1 {
-    color: rgb(255, 255, 255);
-    font-weight: bold;
-    font-size: 22pt;
-    padding-bottom: 10px; 
-  }
-
-  .wrapper .box p {
-    color: rgb(255, 255, 255); 
-    font-size: 14pt;
-    margin-bottom: 20px; 
-  }
-}
 
 
   /* home */
@@ -191,13 +116,6 @@
 }
 
 
-
-  @media (max-width: 768px) {
-    .wrapper {
-      flex-direction: column;
-    }
-  }
-
   /* Userlist */
 
 .verified{
@@ -225,7 +143,110 @@
   background-repeat: no-repeat;
   width: 100%;
 }
+.content-wrapper img {
+  display: none; 
+}
 
+/* Mobile */
 
-/* enroll */
+@media (max-width: 1000px) {
+
+  /* calendar */
+
+  .calendar-wrapper .container #calendar{
+    margin: auto;
+  } 
+  
+  .calendar-wrapper .container{
+    padding: 10px;
+  }
+  
+  .calendar-wrapper{
+    background-size: cover; 
+    background-repeat: no-repeat;
+    width: 100%;
+  }
+
+  /* table */
+  .table thead {
+    display: none; 
+  }
+  .table tbody td, .table tbody th {
+    display: block; 
+    text-align: left; 
+  }
+  .table tbody td:before {
+    content: attr(data-label); 
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px; 
+  }
+/* nav */
+  .navbar .slogan {
+    font-size: 11pt; 
+    flex-basis: 100%; 
+    text-align: center;
+  }
+
+  .btn-group a{
+    text-decoration: none;
+  }
+  .navbar ul li a {
+      font-size: 17pt;
+    }
+
+  .navbar img {
+    height: 80px; 
+    margin-right: 10px; 
+  }
+
+  .content-wrapper{
+    height: 50%;
+    background-size: cover; 
+
+  }
+  .content-wrapper img {
+    display: block;
+    max-width: 100%; 
+    height: auto; 
+  }
+  
+  /* homepage */
+    .wrapper {
+      background-color: black;
+      max-width: 900px;
+      margin: 0 auto; 
+      padding: 40px !important; 
+      background-image: none;
+      flex-direction: column;
+      
+    }
+      
+    .box {
+      padding: 5px;
+      height: 200px !important;
+      width: 100%;
+      max-width: 600px; 
+      margin: 20px auto; 
+      text-align: center !important; 
+      background-color: #000000; 
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+   
+  
+    .wrapper .box h1 {
+      color: rgb(255, 255, 255);
+      font-weight: bold;
+      font-size: 22pt;
+      padding-bottom: 10px; 
+    }
+  
+    .wrapper .box p {
+      color: rgb(255, 255, 255); 
+      font-size: 14pt;
+      margin-bottom: 20px; 
+    }
+  }
+  
 
