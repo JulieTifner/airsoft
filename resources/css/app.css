@@ -8,15 +8,12 @@
 .container{
   margin-top: 30px;
 }
+
+
 /* navbar */
-
-
-  /* CSS-Regel für den Link */
   .nav-link.current {
       color: rgb(255, 255, 2);
   }
-
-
 
 .navbar {
   background-color: black;
@@ -31,12 +28,16 @@
 
 
 .navbar img {
-  height: 40px; 
+  height: 80px; 
   margin-right: 10px; 
 }
 
-.navbar .slogan {
+  
+.slogan {
   font-size: 25pt; 
+  flex-basis: 100%; 
+  text-align: center;
+  font-weight: bold;
 }
 
 .navbar ul {
@@ -57,22 +58,68 @@
   font-size: 16pt;
 }
 
-/* Media Query für größere Bildschirme */
-@media (min-width: 1200px) {
+@media (max-width: 767px) {
   .navbar .slogan {
-    font-size: 30pt;
-    font-weight: bold;
+    font-size: 11pt; 
+    flex-basis: 100%; 
+    text-align: center;
+  }
+
+  .btn-group a{
+    text-decoration: none;
+  }
+  .navbar ul li a {
+      font-size: 17pt;
+    }
+
+  .navbar img {
+    height: 80px; 
+    margin-right: 10px; 
+  }
+
+  .content-wrapper{
+    /* margin-top: 290px; */
+    height: 50%;
+  }
+
+  .wrapper {
+    background-color: black;
+    max-width: 900px;
+    margin: 0 auto; 
+    padding: 40px !important; 
+    background-image: none;
+    
   }
   
-  .navbar ul li a {
-    font-size: 17pt;
+  .box {
+    padding: 20px;
+    height: 200px !important;
+    width: 100%;
+    max-width: 600px; 
+    margin: 20px auto; 
+    text-align: center !important; 
+    background-color: #000000; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+ 
+
+  .wrapper .box h1 {
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    font-size: 14pt;
+    padding-bottom: 10px; 
+  }
+
+  .wrapper .box p {
+    color: rgb(255, 255, 255); 
+    font-size: 12pt;
+    margin-bottom: 20px; 
   }
 }
 
 
-
   /* home */
-
 
   .wrapper {
     display: flex;
@@ -80,13 +127,13 @@
     background-size: cover;
     background-repeat: no-repeat;
     padding: 0 100px 0 100px;
-    height: 100vh; /* Höhe auf 100% der Bildschirmhöhe setzen */
+    height: 100vh; 
   }
 
   .box {
     flex: 1;
     padding: 10px;
-    width: 100px;
+    /* width: 100px; */
     margin: 0px 50px 200px 50px;
     text-align: left;
   }
