@@ -23,6 +23,8 @@
   justify-content: space-between;
   padding: 0 20px;
   color: white;
+  z-index: 1;
+
 
 }
 
@@ -45,11 +47,13 @@
   margin: 0;
   padding: 0;
   display: flex;
+
 }
 
 .navbar ul li {
   margin-left: 10px; 
   padding: 10px;
+
 }
 
 .navbar ul li a {
@@ -201,8 +205,11 @@
     margin-right: 10px; 
   }
 
+  
+  /* homepage */
   .content-wrapper{
-    height: 50%;
+    /* height: 50%; */
+    min-width: 400px;
     background-size: cover; 
 
   }
@@ -211,8 +218,6 @@
     max-width: 100%; 
     height: auto; 
   }
-  
-  /* homepage */
     .wrapper {
       background-color: black;
       max-width: 900px;
